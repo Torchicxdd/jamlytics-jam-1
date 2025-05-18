@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://d2id6wt8i5rv0"]
+
+[node name="Wire" type="Line2D"]
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0, 0, 0, 1)

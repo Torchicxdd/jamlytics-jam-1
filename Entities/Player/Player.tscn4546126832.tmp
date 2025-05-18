@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqnasfyhhk2ud"]
+
+[ext_resource type="Texture2D" uid="uid://djvjxykg07ixo" path="res://Entities/Player/Body/Body.png" id="1_e5kic"]
+[ext_resource type="Script" uid="uid://ce47d8vdairon" path="res://Entities/Player/player.gd" id="1_ww0jn"]
+[ext_resource type="PackedScene" uid="uid://d2id6wt8i5rv0" path="res://Entities/Player/Tail/Wire.tscn" id="4_1des2"]
+[ext_resource type="Script" uid="uid://bsen2gho1r6o0" path="res://Entities/Player/tail_controller.gd" id="4_an6q6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ww0jn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e5kic")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ww0jn"]
+size = Vector2(112, 112)
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_ww0jn")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(39.4, 39.4)
+scale = Vector2(0.915625, 0.915625)
+sprite_frames = SubResource("SpriteFrames_ww0jn")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(40, 39)
+shape = SubResource("RectangleShape2D_ww0jn")
+
+[node name="TailController" type="Node2D" parent="."]
+script = ExtResource("4_an6q6")
+
+[node name="RayCast2D" type="RayCast2D" parent="TailController"]
+target_position = Vector2(1000, 0)
+
+[node name="Tail" parent="TailController" instance=ExtResource("4_1des2")]
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0, 0, 0, 1)

@@ -1,46 +1,42 @@
 extends CharacterBody2D
+class_name PlayerController
 
-@export var speed = 400
-var movement_direction = Vector2.ZERO
-var input_handler = InputHandler.new()
+@export var speed = 10.0
+@export var jump_power = 10.0
 
-var screen_size
+@onready var tailController = $TailController
 
-func _ready():
-	screen_size = get_viewport_rect().size
-
-func _physics_process(delta):
-	move_handler(delta)
-	handle_animations()
+var speed_multiplier = 30.0
+var jump_multiplier = -30.0
 
 func _input(event):
-	if event.is_action("move_left"):
-		if event.is_pressed() and not event.is_echo():
-			movement_direction.x += -1
-		elif not event.is_pressed():
-			movement_direction.x += 1
-	if event.is_action("move_right"):
-		if event.is_pressed() and not event.is_echo():
-			movement_direction.x += 1
-		elif not event.is_pressed():
-			movement_direction.x += -1
-	if event.is_action("move_up"):
-		if event.is_pressed() and not event.is_echo():
-			movement_direction.y += -1
-		elif not event.is_pressed():
-			movement_direction.y += 1
-	if event.is_action("move_down"):
-		if event.is_pressed() and not event.is_echo():
-			movement_direction.y += 1
-		elif not event.is_pressed():
-			movement_direction.x += -1
+	# Handle jump.
+	if event.is_action_pressed("move_up") and is_on_floor():
+		velocity.y = jump_power * jump_multiplier
 
-func move_handler(delta):
-	velocity = movement_direction * speed
-	position += velocity * delta
+	# Handle jump down
+	if event.is_action_pressed("move_down"):
+		set_collision_mask_value(10, false)
+	else:
+		set_collision_mask_value(10, true)
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	var direction = Input.get_axis("move_left", "move_right")
+	if direction:
+		velocity.x = direction * speed * speed_multiplier
+	else:           
+		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
+		
+	move_and_slide()
+	handle_animations()
 
 func handle_animations():
 	if velocity.length() > 0:
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
+	
