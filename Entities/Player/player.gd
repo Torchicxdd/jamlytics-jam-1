@@ -2,7 +2,7 @@ extends Node2D
 
 @export var speed: float = 450.0
 @export var jump_power: float = 450.0
-@export var max_vertical_velocity: float = 3500.0
+@export var max_vertical_velocity: float = 2250.0
 @export var max_jump_time: float = 0.25
 var impulse_strength: float = 15.0
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -114,6 +114,8 @@ func vertical_movement_handler(delta):
 	else:
 		# Handle gravity
 		if $CharacterBody2D.velocity.y < max_vertical_velocity:
+			print($CharacterBody2D.velocity.y)
+			print(max_vertical_velocity)
 			$CharacterBody2D.velocity.y += gravity * delta
 	if has_canceled_jump:
 		$CharacterBody2D.velocity.y += lerp(0.0, -jump_power, 0.1)
