@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://d11att5mis0e5"]
+[gd_scene load_steps=16 format=3 uid="uid://d11att5mis0e5"]
 
 [ext_resource type="Script" uid="uid://cboku4xlejoaj" path="res://Entities/Player/Player.gd" id="1_vweq0"]
 [ext_resource type="Texture2D" uid="uid://dtmd0u3a3rcqe" path="res://Entities/Player/Body/runCycle.png" id="2_vweq0"]
 [ext_resource type="Texture2D" uid="uid://qyhhsitgste6" path="res://icon.svg" id="2_ww0jn"]
+[ext_resource type="PackedScene" uid="uid://dlhne6yk770xp" path="res://Entities/Player/Tail/Plug.tscn" id="4_1des2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1des2"]
 atlas = ExtResource("2_vweq0")
@@ -113,8 +114,21 @@ sprite_frames = SubResource("SpriteFrames_ww0jn")
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_vweq0")
 
+[node name="Tail" type="Line2D" parent="RigidBody2D"]
+points = PackedVector2Array(0, 0, 0, 0)
+
+[node name="RayCast2D" type="RayCast2D" parent="RigidBody2D"]
+
+[node name="Plug" parent="RigidBody2D" instance=ExtResource("4_1des2")]
+
+[node name="PinJoint2D" type="PinJoint2D" parent="RigidBody2D/Plug"]
+node_a = NodePath("..")
+node_b = NodePath("../..")
+softness = 0.65
+
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
+zoom = Vector2(0.7, 0.7)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0

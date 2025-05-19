@@ -6,6 +6,8 @@
 size = Vector2(128, 127)
 
 [node name="Plug" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7ftw2")
@@ -13,5 +15,3 @@ texture = ExtResource("1_7ftw2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_7ftw2")
-
-[node name="Marker2D" type="Marker2D" parent="."]

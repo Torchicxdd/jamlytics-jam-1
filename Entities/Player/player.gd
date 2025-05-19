@@ -1,3 +1,9 @@
+# NEVER USE PLAYER NODE'S METHODS
+# ALWAYS USE METHODS LOCAL TO CHARCATERBODY2D OR RIGIDBODY2D
+
+# Player bodies and terrain on physics layer 1
+# Plug/sockets on physics layer 2
+
 extends Node2D
 
 @export var speed: float = 450.0
@@ -12,10 +18,13 @@ var pending_physics_mode = false
 var pending_character_mode = false
 var is_jumping = false
 var has_canceled_jump = false
+var is_swinging = false
 
 var camera_position = Vector2.ZERO
 var previous_jump_time = Time.get_unix_time_from_system()
 var time_between_jump
+
+var hook_position: Vector2
 
 func _ready() -> void:
 	set_body_state($RigidBody2D, false, true, 0, 0)
@@ -58,12 +67,29 @@ func _input(event: InputEvent) -> void:
 		pending_physics_mode = true
 	elif event.is_action_released("left_click"):
 		pending_character_mode = true
+		is_swinging = false
 
 func _process(delta: float) -> void:
 	if not is_jumping:
 		previous_jump_time = Time.get_unix_time_from_system()
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("left_click"):
+		hook_position = $CharacterBody2D.get_global_mouse_position()
+		$RigidBody2D/RayCast2D.target_position = $RigidBody2D.to_local(hook_position)
+		$RigidBody2D/RayCast2D.force_raycast_update()
+		if $RigidBody2D/RayCast2D.is_colliding() and $RigidBody2D/RayCast2D.get_collider().is_in_group("Hookable"):
+			$RigidBody2D.linear_velocity += Vector2(-500, 0)
+			is_swinging = true
+	
+	if is_swinging:
+		$RigidBody2D/RayCast2D.target_position = $RigidBody2D.to_local(hook_position)
+		$RigidBody2D/RayCast2D.force_raycast_update()
+		swing_handler()
+	else:
+		$RigidBody2D/Tail.set_point_position(1, Vector2.ZERO)
+		$RigidBody2D/Plug.position = Vector2.ZERO
+		pending_character_mode = true
 	if pending_physics_mode:
 		switch_to_physics_mode()
 		pending_physics_mode = false
@@ -82,6 +108,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func character_process_handler(delta):
+	$RigidBody2D.global_position = $CharacterBody2D.global_position
 	camera_position = $CharacterBody2D.global_position
 	
 	# Falling / jumping boolean setters
@@ -96,12 +123,19 @@ func character_process_handler(delta):
 	
 	$CharacterBody2D.move_and_slide()
 
+func swing_handler():
+	var collision_position = $RigidBody2D.to_local($RigidBody2D/RayCast2D.get_collision_point())
+	$RigidBody2D/Tail.set_point_position(1, collision_position)
+	$RigidBody2D/Plug.position = collision_position
+	
+
 func horizontal_movement_handler():
 	var horizontal = Input.get_axis("move_left", "move_right")
 	if horizontal:
 		$CharacterBody2D.velocity.x = horizontal * speed
 	else:           
 		$CharacterBody2D.velocity.x = move_toward($CharacterBody2D.velocity.x, 0, speed)
+		
 
 func vertical_movement_handler(delta):
 	# First started jumping
@@ -114,14 +148,13 @@ func vertical_movement_handler(delta):
 	else:
 		# Handle gravity
 		if $CharacterBody2D.velocity.y < max_vertical_velocity:
-			print($CharacterBody2D.velocity.y)
-			print(max_vertical_velocity)
 			$CharacterBody2D.velocity.y += gravity * delta
 	if has_canceled_jump:
 		$CharacterBody2D.velocity.y += lerp(0.0, -jump_power, 0.1)
 		has_canceled_jump = false
 
 func swinging_process_handler(delta):
+	$CharacterBody2D.global_position = $RigidBody2D.global_position
 	camera_position = $RigidBody2D.global_position
 
 func handle_animations():

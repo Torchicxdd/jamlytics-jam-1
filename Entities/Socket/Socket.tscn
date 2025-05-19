@@ -4,16 +4,15 @@
 [ext_resource type="Script" uid="uid://ddiw8e2q41rmy" path="res://Entities/Socket/socket.gd" id="1_rsgiw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mc3b"]
-size = Vector2(186, 187)
+size = Vector2(138, 136)
 
-[node name="Socket" type="Node2D" groups=["Hookable"]]
+[node name="Socket" type="Node2D"]
 script = ExtResource("1_rsgiw")
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["Hookable"]]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_2mc3b")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Hookable"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" groups=["Hookable"]]
-position = Vector2(0, -1.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_2mc3b")
