@@ -6,6 +6,7 @@
 
 extends Node2D
 
+# Constants
 @export var speed: float = 450.0
 @export var jump_power: float = 450.0
 @export var max_vertical_velocity: float = 2250.0
@@ -13,17 +14,20 @@ extends Node2D
 var impulse_strength: float = 15.0
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# Character states
 var is_character_mode = true
-var pending_physics_mode = false
-var pending_character_mode = false
+var is_swinging_mode = false
 var is_jumping = false
 var has_canceled_jump = false
-var is_swinging = false
 
+# Camera
 var camera_position = Vector2.ZERO
+
+# Jumping constants
 var previous_jump_time = Time.get_unix_time_from_system()
 var time_between_jump
 
+# Swinging position
 var hook_position: Vector2
 
 func _ready() -> void:
@@ -43,8 +47,9 @@ func switch_to_character_mode():
 		set_body_state($CharacterBody2D, true, false, 1, 1)
 		
 		is_character_mode = true
+		is_swinging_mode = false
 
-func switch_to_physics_mode():
+func switch_to_swinging_mode():
 	if is_character_mode:
 		$RigidBody2D.linear_velocity = $CharacterBody2D.velocity
 		$RigidBody2D.global_position = $CharacterBody2D.global_position
@@ -55,19 +60,14 @@ func switch_to_physics_mode():
 		$RigidBody2D.freeze = false
 		
 		is_character_mode = false
+		is_swinging_mode = true
+		
 
 func set_body_state(body: Node2D, visible: bool, disabled: bool, layer: int, mask: int) -> void:
 	body.visible = visible
 	body.get_node("CollisionShape2D").disabled = disabled
 	body.collision_layer = layer
 	body.collision_mask = mask
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_click"):
-		pending_physics_mode = true
-	elif event.is_action_released("left_click"):
-		pending_character_mode = true
-		is_swinging = false
 
 func _process(delta: float) -> void:
 	if not is_jumping:
@@ -80,26 +80,23 @@ func _physics_process(delta: float) -> void:
 		$RigidBody2D/RayCast2D.force_raycast_update()
 		if $RigidBody2D/RayCast2D.is_colliding() and $RigidBody2D/RayCast2D.get_collider().is_in_group("Hookable"):
 			$RigidBody2D.linear_velocity += Vector2(-500, 0)
-			is_swinging = true
+			switch_to_swinging_mode()
+	elif Input.is_action_just_released("left_click"):
+		switch_to_character_mode()
 	
-	if is_swinging:
+	
+	if is_swinging_mode:
 		$RigidBody2D/RayCast2D.target_position = $RigidBody2D.to_local(hook_position)
 		$RigidBody2D/RayCast2D.force_raycast_update()
 		swing_handler()
 	else:
 		$RigidBody2D/Tail.set_point_position(1, Vector2.ZERO)
 		$RigidBody2D/Plug.position = Vector2.ZERO
-		pending_character_mode = true
-	if pending_physics_mode:
-		switch_to_physics_mode()
-		pending_physics_mode = false
-	elif pending_character_mode:
 		switch_to_character_mode()
-		pending_character_mode = false
 	
 	if is_character_mode:
 		character_process_handler(delta)
-	else:
+	elif is_swinging_mode:
 		swinging_process_handler(delta)
 	
 	# Place camera according to current body
