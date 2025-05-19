@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://cpktaqex12lsf"]
+[gd_scene load_steps=8 format=4 uid="uid://cpktaqex12lsf"]
 
 [ext_resource type="Texture2D" uid="uid://d1lk5rgnpcljt" path="res://Stages/Map/Mossy - FloatingPlatforms.png" id="2_urooj"]
-[ext_resource type="PackedScene" uid="uid://dqnasfyhhk2ud" path="res://Entities/Player/Player.tscn" id="3_urooj"]
+[ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="3_urooj"]
+[ext_resource type="Texture2D" uid="uid://qyhhsitgste6" path="res://icon.svg" id="3_wlj70"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5bpvm"]
 texture = ExtResource("2_urooj")
@@ -41,8 +42,15 @@ texture_region_size = Vector2i(512, 512)
 
 [sub_resource type="TileSet" id="TileSet_yqbqi"]
 tile_size = Vector2i(512, 512)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 sources/2 = SubResource("TileSetAtlasSource_5bpvm")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urooj"]
+size = Vector2(126, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_duc0h"]
+size = Vector2(131, 129)
 
 [node name="Map" type="Node2D"]
 
@@ -53,8 +61,33 @@ position = Vector2(404, 0)
 tile_map_data = PackedByteArray("AAAAAAEAAgACAAIAAAABAAEAAgACAAIAAAACAAEAAgACAAIAAAD//wEAAgACAAIAAAD8//7/AgABAAIAAAD9//7/AgACAAIAAAD+//7/AgADAAIAAAA=")
 tile_set = SubResource("TileSet_yqbqi")
 
-[node name="Player" parent="." instance=ExtResource("3_urooj")]
-position = Vector2(-896, -1214)
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(841, -332)
+metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.5, 0.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_urooj")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("3_wlj70")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="StaticBody2D"]
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody2D")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(322, 32)
+lock_rotation = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("3_wlj70")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_duc0h")
+
+[node name="Player" parent="." instance=ExtResource("3_urooj")]
+position = Vector2(-1529, -1162)
+metadata/_edit_group_ = true
