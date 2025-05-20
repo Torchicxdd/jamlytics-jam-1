@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://d11att5mis0e5"]
+[gd_scene load_steps=14 format=3 uid="uid://d11att5mis0e5"]
 
 [ext_resource type="Script" uid="uid://cboku4xlejoaj" path="res://Entities/Player/Player.gd" id="1_vweq0"]
 [ext_resource type="Texture2D" uid="uid://dtmd0u3a3rcqe" path="res://Entities/Player/Body/runCycle.png" id="2_vweq0"]
-[ext_resource type="Texture2D" uid="uid://qyhhsitgste6" path="res://icon.svg" id="2_ww0jn"]
 [ext_resource type="PackedScene" uid="uid://dlhne6yk770xp" path="res://Entities/Player/Tail/Plug.tscn" id="4_1des2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1des2"]
@@ -77,55 +76,24 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vweq0"]
 size = Vector2(83, 125)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ww0jn"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_ww0jn")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[node name="Player" type="Node2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_vweq0")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Plug" parent="." instance=ExtResource("4_1des2")]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_x44r4")
 animation = &"run_left"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_vweq0")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-visible = false
-mass = 100.0
-lock_rotation = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
-sprite_frames = SubResource("SpriteFrames_ww0jn")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(0.5, -0.5)
-shape = SubResource("RectangleShape2D_vweq0")
-
-[node name="Tail" type="Line2D" parent="RigidBody2D"]
+[node name="Tail" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
 
-[node name="RayCast2D" type="RayCast2D" parent="RigidBody2D"]
-
-[node name="Plug" parent="RigidBody2D" instance=ExtResource("4_1des2")]
-
-[node name="PinJoint2D" type="PinJoint2D" parent="."]
-node_a = NodePath("../RigidBody2D")
-node_b = NodePath("../RigidBody2D/Plug")
-bias = 0.11
-softness = 0.3
+[node name="RayCast2D" type="RayCast2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
