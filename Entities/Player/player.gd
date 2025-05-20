@@ -27,6 +27,7 @@ var global_socket_position: Vector2
 var swing_angle: float
 var swing_length: float
 var angular_velocity: float = 0.0
+@export var swing_energy_loss: float = 0.99
 
 func _process(delta: float) -> void:
 	if not is_jumping:
@@ -108,7 +109,7 @@ func vertical_movement_handler(delta):
 func swinging_process_handler(delta):
 	var swing_relative_character_position = global_position - global_socket_position
 	
-	# Apply existing velocity
+	#Apply existing velocity
 	var tangent_dir = Vector2(cos(swing_angle), -sin(swing_angle))
 	var tangential_speed = velocity.dot(tangent_dir)
 	angular_velocity = tangential_speed / swing_length
@@ -116,8 +117,14 @@ func swinging_process_handler(delta):
 	# Calculate new velocity
 	var angular_acceleration = -(gravity / swing_length) * sin(swing_angle)
 	angular_velocity += angular_acceleration * delta
+	angular_velocity *= swing_energy_loss
 	swing_angle += angular_velocity * delta
 	velocity = Vector2(cos(swing_angle), -sin(swing_angle)) * swing_length * angular_velocity
+	
+	# Keep the new velocity tangential.
+	# Was creating inwards movement creep without
+	var tangent = Vector2(-swing_relative_character_position.y, swing_relative_character_position.x).normalized()
+	velocity = velocity.dot(tangent) * tangent
 
 func handle_animations():
 	if is_character_mode:
