@@ -60,8 +60,8 @@ tile_map_data = PackedByteArray("AADs/wIAAQABAAEAAADs/wMAAQABAAEAAADs/wQAAQABAAE
 tile_set = SubResource("TileSet_5bpvm")
 
 [node name="Player" parent="." instance=ExtResource("3_urooj")]
-position = Vector2(-513, -204)
+position = Vector2(-1547, -825)
 metadata/_edit_group_ = true
 
 [node name="Socket" parent="." instance=ExtResource("3_wlj70")]
-position = Vector2(-2026, -517)
+position = Vector2(-1954, -766)

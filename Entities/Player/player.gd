@@ -29,6 +29,7 @@ var time_between_jump
 
 # Swinging position
 var hook_position: Vector2
+var socket_position: Vector2
 
 func _ready() -> void:
 	set_body_state($RigidBody2D, false, true, 0, 0)
@@ -78,9 +79,12 @@ func _physics_process(delta: float) -> void:
 		hook_position = $CharacterBody2D.get_global_mouse_position()
 		$RigidBody2D/RayCast2D.target_position = $RigidBody2D.to_local(hook_position)
 		$RigidBody2D/RayCast2D.force_raycast_update()
-		if $RigidBody2D/RayCast2D.is_colliding() and $RigidBody2D/RayCast2D.get_collider().is_in_group("Hookable"):
-			$RigidBody2D.linear_velocity += Vector2(-500, 0)
-			switch_to_swinging_mode()
+		if $RigidBody2D/RayCast2D.is_colliding():
+			var collider = $RigidBody2D/RayCast2D.get_collider()
+			if collider.is_in_group("Hookable") and collider is StaticBody2D:
+				socket_position = collider.global_position
+				$RigidBody2D.linear_velocity += Vector2(-500, 0)
+				switch_to_swinging_mode()
 	elif Input.is_action_just_released("left_click"):
 		switch_to_character_mode()
 	
@@ -121,10 +125,10 @@ func character_process_handler(delta):
 	$CharacterBody2D.move_and_slide()
 
 func swing_handler():
-	var collision_position = $RigidBody2D.to_local($RigidBody2D/RayCast2D.get_collision_point())
-	$RigidBody2D/Tail.set_point_position(1, collision_position)
-	$RigidBody2D/Plug.position = collision_position
-	
+	var local_socket_position = $RigidBody2D.to_local(socket_position)
+	$RigidBody2D/Tail.set_point_position(1, local_socket_position)
+	$RigidBody2D/Plug.position = local_socket_position
+	$PinJoint2D.position = local_socket_position
 
 func horizontal_movement_handler():
 	var horizontal = Input.get_axis("move_left", "move_right")

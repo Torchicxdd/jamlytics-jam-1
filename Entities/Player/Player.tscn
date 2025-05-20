@@ -121,10 +121,11 @@ points = PackedVector2Array(0, 0, 0, 0)
 
 [node name="Plug" parent="RigidBody2D" instance=ExtResource("4_1des2")]
 
-[node name="PinJoint2D" type="PinJoint2D" parent="RigidBody2D/Plug"]
-node_a = NodePath("..")
-node_b = NodePath("../..")
-softness = 0.65
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("../RigidBody2D")
+node_b = NodePath("../RigidBody2D/Plug")
+bias = 0.11
+softness = 0.3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
