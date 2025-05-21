@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d11att5mis0e5"]
+[gd_scene load_steps=19 format=3 uid="uid://d11att5mis0e5"]
 
 [ext_resource type="Script" uid="uid://cboku4xlejoaj" path="res://Entities/Player/player.gd" id="1_vweq0"]
 [ext_resource type="Texture2D" uid="uid://d3nuw6bx6tyxs" path="res://Entities/Player/Body/PlayerSpritesheetV1.png" id="3_vweq0"]
@@ -32,7 +32,11 @@ region = Rect2(1024, 512, 512, 512)
 atlas = ExtResource("3_vweq0")
 region = Rect2(1536, 512, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_061yh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vweq0"]
+atlas = ExtResource("3_vweq0")
+region = Rect2(0, 1024, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hj1c0"]
 atlas = ExtResource("3_vweq0")
 region = Rect2(512, 1024, 512, 512)
 
@@ -66,7 +70,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"fall",
-"speed": 3.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -83,15 +87,18 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 3.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_061yh")
+"texture": SubResource("AtlasTexture_vweq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hj1c0")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
-"speed": 3.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -108,7 +115,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 10.0
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vweq0"]
@@ -124,6 +131,8 @@ swing_energy_loss = 0.999
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_5m37j")
 animation = &"fall"
+autoplay = "idle"
+frame_progress = 0.60133
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
@@ -136,7 +145,7 @@ points = PackedVector2Array(0, 0, 0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
-zoom = Vector2(0.7, 0.7)
+zoom = Vector2(0.8, 0.8)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
