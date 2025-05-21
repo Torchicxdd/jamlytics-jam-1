@@ -15,9 +15,6 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_swinging = false
 var is_jumping = false
 var has_canceled_jump = false
-var is_falling = false
-var is_facing_left = true
-var is_idle = true
 
 # Jumping constants
 var previous_jump_time = Time.get_unix_time_from_system()
@@ -131,10 +128,11 @@ func handle_animations():
 	if velocity.x < 0:
 		$AnimatedSprite2D.flip_h = false
 		
-	if is_jumping && velocity.y < 0:
-		$AnimatedSprite2D.play("jump")
-	elif velocity.y > 0 && not is_on_floor():
-		$AnimatedSprite2D.play("fall")
+	if not is_on_floor():
+		if velocity.y < 0:
+			$AnimatedSprite2D.play("jump")
+		elif velocity.y > 0:
+			$AnimatedSprite2D.play("fall")
 	elif velocity.x != 0:
 		$AnimatedSprite2D.play("run")
 	else:

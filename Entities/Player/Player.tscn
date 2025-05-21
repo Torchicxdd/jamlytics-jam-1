@@ -1,6 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://d11att5mis0e5"]
+[gd_scene load_steps=18 format=3 uid="uid://d11att5mis0e5"]
 
-[ext_resource type="Script" uid="uid://cboku4xlejoaj" path="res://Entities/Player/Player.gd" id="1_vweq0"]
+[ext_resource type="Script" uid="uid://cboku4xlejoaj" path="res://Entities/Player/player.gd" id="1_vweq0"]
 [ext_resource type="Texture2D" uid="uid://d3nuw6bx6tyxs" path="res://Entities/Player/Body/PlayerSpritesheetV1.png" id="3_vweq0"]
 [ext_resource type="PackedScene" uid="uid://dlhne6yk770xp" path="res://Entities/Player/Tail/Plug.tscn" id="4_1des2"]
 
@@ -15,10 +15,6 @@ region = Rect2(512, 1536, 512, 512)
 [sub_resource type="AtlasTexture" id="AtlasTexture_t38ms"]
 atlas = ExtResource("3_vweq0")
 region = Rect2(1024, 1536, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hj1c0"]
-atlas = ExtResource("3_vweq0")
-region = Rect2(1536, 1536, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x44r4"]
 atlas = ExtResource("3_vweq0")
@@ -35,10 +31,6 @@ region = Rect2(1024, 512, 512, 512)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jynvv"]
 atlas = ExtResource("3_vweq0")
 region = Rect2(1536, 512, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lmeus"]
-atlas = ExtResource("3_vweq0")
-region = Rect2(0, 1024, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_061yh"]
 atlas = ExtResource("3_vweq0")
@@ -71,9 +63,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t38ms")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hj1c0")
 }],
 "loop": true,
 "name": &"fall",
@@ -97,9 +86,6 @@ animations = [{
 "speed": 3.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lmeus")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_061yh")
 }],
@@ -137,7 +123,7 @@ swing_energy_loss = 0.999
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_5m37j")
-animation = &"jump"
+animation = &"fall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
