@@ -12,10 +12,12 @@ var impulse_strength: float = 15.0
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Character states
-var is_character_mode = true
-var is_swinging_mode = false
+var is_swinging = false
 var is_jumping = false
 var has_canceled_jump = false
+var is_falling = false
+var is_facing_left = true
+var is_idle = true
 
 # Jumping constants
 var previous_jump_time = Time.get_unix_time_from_system()
@@ -42,28 +44,27 @@ func _physics_process(delta: float) -> void:
 			var collider = $RayCast2D.get_collider()
 			if collider.is_in_group("Hookable") and collider is StaticBody2D:
 				global_socket_position = collider.global_position
-				is_swinging_mode = true
+				is_swinging = true
 				var swing_relative_character_position = global_position - global_socket_position
 				swing_angle = atan2(swing_relative_character_position.x, swing_relative_character_position.y)
 				swing_length = global_position.distance_to(global_socket_position)
 				
 	elif Input.is_action_just_released("left_click"):
-		is_swinging_mode = false
+		is_swinging = false
 	
 	# Setting variables related to swinging and unswinging
-	if is_swinging_mode:
+	if is_swinging:
 		$RayCast2D.target_position = to_local(global_hook_position)
 		$RayCast2D.force_raycast_update()
 		swing_objects_handler()
 		swinging_process_handler(delta)
-		move_and_slide()
 	else:
 		$Tail.set_point_position(1, Vector2.ZERO)
 		$Plug.position = Vector2.ZERO
 		character_process_handler(delta)
 	
+	move_and_slide()
 	handle_animations()
-	
 
 func character_process_handler(delta):
 	# Falling / jumping boolean setters
@@ -75,7 +76,6 @@ func character_process_handler(delta):
 	
 	horizontal_movement_handler()
 	vertical_movement_handler(delta)
-	move_and_slide()
 
 func swing_objects_handler():
 	var local_socket_position = to_local(global_socket_position)
@@ -88,7 +88,6 @@ func horizontal_movement_handler():
 		velocity.x = horizontal * speed
 	else:           
 		velocity.x = move_toward(velocity.x, 0, speed)
-		
 
 func vertical_movement_handler(delta):
 	# First started jumping
@@ -127,10 +126,17 @@ func swinging_process_handler(delta):
 	velocity = velocity.dot(tangent) * tangent
 
 func handle_animations():
-	if is_character_mode:
-		if velocity.x > 0:
-			$AnimatedSprite2D.play("run_right")
-		elif velocity.x < 0:
-			$AnimatedSprite2D.play("run_left")
-		else:
-			$AnimatedSprite2D.stop()
+	if velocity.x > 0:
+		$AnimatedSprite2D.flip_h = true
+	if velocity.x < 0:
+		$AnimatedSprite2D.flip_h = false
+		
+	if is_jumping && velocity.y < 0:
+		$AnimatedSprite2D.play("jump")
+	elif velocity.y > 0 && not is_on_floor():
+		$AnimatedSprite2D.play("fall")
+	elif velocity.x != 0:
+		$AnimatedSprite2D.play("run")
+	else:
+		$AnimatedSprite2D.play("idle")
+		
