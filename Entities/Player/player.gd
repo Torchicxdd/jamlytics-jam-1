@@ -5,20 +5,25 @@ extends CharacterBody2D
 
 # Constants
 @export var speed: float = 450.0
-@export var jump_power: float = 450.0
-@export var max_vertical_velocity: float = 2250.0
-@export var max_jump_time: float = 0.25
-var impulse_strength: float = 15.0
+@export var jump_power: float = 1200.0
+@export var charge_jump_power: float = 1200.0
+@export var charge_dash_power: int = 5
+@export var max_charge_jump_power: float = 2000.0
+@export var max_charge_time: float = 1.0
+
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Character states
 var is_swinging = false
 var is_jumping = false
-var has_canceled_jump = false
+var is_charging = false
+var is_charge_jumping = false
+var is_charge_dashing = false
 
 # Jumping constants
-var previous_jump_time = Time.get_unix_time_from_system()
-var time_between_jump
+
+# Charging constants
+var current_charge_time = 0.0
 
 # Swinging values
 var global_hook_position: Vector2
@@ -27,10 +32,7 @@ var swing_angle: float
 var swing_length: float
 var angular_velocity: float = 0.0
 @export var swing_energy_loss: float = 0.99
-
-func _process(delta: float) -> void:
-	if not is_jumping:
-		previous_jump_time = Time.get_unix_time_from_system()
+	
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -60,19 +62,23 @@ func _physics_process(delta: float) -> void:
 		$Plug.position = Vector2.ZERO
 		character_process_handler(delta)
 	
+	# Apply gravity
+	if not is_on_floor():
+		velocity.y += gravity * delta
+		
 	move_and_slide()
 	handle_animations()
 
 func character_process_handler(delta):
 	# Falling / jumping boolean setters
-	if is_on_floor() or Input.is_action_just_released("move_up"):
+	if is_on_floor():
 		is_jumping = false
-	if Time.get_unix_time_from_system() - previous_jump_time >= max_jump_time:
-		has_canceled_jump = true
-		is_jumping = false
+		is_charge_jumping = false
+		is_charge_dashing = false
 	
 	horizontal_movement_handler()
 	vertical_movement_handler(delta)
+	$Camera2D/ChargeBar.value = current_charge_time / max_charge_time
 
 func swing_objects_handler():
 	var local_socket_position = to_local(global_socket_position)
@@ -83,25 +89,47 @@ func horizontal_movement_handler():
 	var horizontal = Input.get_axis("move_left", "move_right")
 	if horizontal:
 		velocity.x = horizontal * speed
+		if is_charge_dashing:
+			velocity.x = horizontal * speed * charge_dash_power
+			
 	else:           
 		velocity.x = move_toward(velocity.x, 0, speed)
 
 func vertical_movement_handler(delta):
 	# First started jumping
-	if Input.is_action_just_pressed("move_up") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		is_jumping = true
-		has_canceled_jump = false;
-		
-	if is_jumping:
+		is_charge_jumping = false
+		is_charge_dashing = false
 		velocity.y = -(jump_power)
-	else:
-		# Handle gravity
-		if velocity.y < max_vertical_velocity:
-			velocity.y += gravity * delta
-	if has_canceled_jump:
-		velocity.y += lerp(0.0, -jump_power, 0.1)
-		has_canceled_jump = false
+	
+	if Input.is_action_just_released("charge_jump") and is_on_floor():
+		is_jumping = false
+		is_charge_jumping = true
+		is_charge_dashing = false
+		velocity.y = -(charge_jump_power)
+		
+	if Input.is_action_just_released("charge_jump") and not is_on_floor():
+		is_jumping = false
+		is_charge_jumping = false
+		is_charge_dashing = true
+		velocity.y = -(charge_jump_power/2)
 
+	# Handle charging jumps
+	if Input.is_action_pressed("charge_jump"):
+		is_charging = true
+	else:
+		is_charging = false
+		current_charge_time = 0.0
+
+	if is_charging:
+		current_charge_time += delta
+		if current_charge_time >= max_charge_time:
+			current_charge_time = max_charge_time
+		charge_jump_power = lerp(900.0, max_charge_jump_power, current_charge_time / max_charge_time)
+		
+	
+	
 func swinging_process_handler(delta):
 	var swing_relative_character_position = global_position - global_socket_position
 	
