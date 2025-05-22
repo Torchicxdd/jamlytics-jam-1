@@ -65,3 +65,6 @@ metadata/_edit_group_ = true
 
 [node name="Socket" parent="." instance=ExtResource("3_wlj70")]
 position = Vector2(-1954, -766)
+
+[node name="Socket2" parent="." instance=ExtResource("3_wlj70")]
+position = Vector2(-372, -904)

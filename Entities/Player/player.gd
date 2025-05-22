@@ -7,9 +7,11 @@ extends CharacterBody2D
 @export var speed: float = 450.0
 @export var jump_power: float = 1200.0
 @export var charge_jump_power: float = 1200.0
-@export var charge_dash_power: int = 5
+@export var charge_dash_power: int = 1
+@export var max_charge_dash_power: int = 5
 @export var max_charge_jump_power: float = 2000.0
 @export var max_charge_time: float = 1.0
+@export var swing_gravitational_multiplier: float = 2
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -51,11 +53,15 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_released("left_click"):
 		is_swinging = false
 	
+	handle_charge_inputs(delta)
+	
 	# Setting variables related to swinging and unswinging
 	if is_swinging:
 		$RayCast2D.target_position = to_local(global_hook_position)
 		$RayCast2D.force_raycast_update()
-		swing_objects_handler()
+		var local_socket_position = to_local(global_socket_position)
+		$Tail.set_point_position(1, local_socket_position)
+		$Plug.position = local_socket_position
 		swinging_process_handler(delta)
 	else:
 		$Tail.set_point_position(1, Vector2.ZERO)
@@ -65,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		
+	
 	move_and_slide()
 	handle_animations()
 
@@ -78,7 +84,6 @@ func character_process_handler(delta):
 	
 	horizontal_movement_handler()
 	vertical_movement_handler(delta)
-	$Camera2D/ChargeBar.value = current_charge_time / max_charge_time
 
 func swing_objects_handler():
 	var local_socket_position = to_local(global_socket_position)
@@ -101,34 +106,39 @@ func vertical_movement_handler(delta):
 		is_jumping = true
 		is_charge_jumping = false
 		is_charge_dashing = false
+		is_swinging = false
 		velocity.y = -(jump_power)
 	
-	if Input.is_action_just_released("charge_jump") and is_on_floor():
+func handle_charge_inputs(delta):
+	if Input.is_action_just_released("charge") and is_on_floor() and not is_charge_jumping:
 		is_jumping = false
 		is_charge_jumping = true
 		is_charge_dashing = false
+		is_swinging = false
 		velocity.y = -(charge_jump_power)
 		
-	if Input.is_action_just_released("charge_jump") and not is_on_floor():
+	if Input.is_action_just_released("charge") and not is_on_floor() and not is_charge_dashing:
 		is_jumping = false
 		is_charge_jumping = false
 		is_charge_dashing = true
+		is_swinging = false
 		velocity.y = -(charge_jump_power/2)
-
+		
 	# Handle charging jumps
-	if Input.is_action_pressed("charge_jump"):
+	if Input.is_action_pressed("charge"):
 		is_charging = true
 	else:
 		is_charging = false
 		current_charge_time = 0.0
-
+		
 	if is_charging:
 		current_charge_time += delta
 		if current_charge_time >= max_charge_time:
 			current_charge_time = max_charge_time
 		charge_jump_power = lerp(900.0, max_charge_jump_power, current_charge_time / max_charge_time)
-		
+		charge_dash_power = lerp(2, max_charge_dash_power, current_charge_time / max_charge_time)
 	
+	$Camera2D/ChargeBar.value = current_charge_time / max_charge_time
 	
 func swinging_process_handler(delta):
 	var swing_relative_character_position = global_position - global_socket_position
@@ -139,9 +149,12 @@ func swinging_process_handler(delta):
 	angular_velocity = tangential_speed / swing_length
 	
 	# Calculate new velocity
-	var angular_acceleration = -(gravity / swing_length) * sin(swing_angle)
+	var angular_acceleration = -(gravity * swing_gravitational_multiplier / swing_length) * sin(swing_angle)
 	angular_velocity += angular_acceleration * delta
 	angular_velocity *= swing_energy_loss
+	if angular_velocity == 0:
+		is_swinging = false
+	
 	swing_angle += angular_velocity * delta
 	velocity = Vector2(cos(swing_angle), -sin(swing_angle)) * swing_length * angular_velocity
 	
@@ -149,6 +162,7 @@ func swinging_process_handler(delta):
 	# Was creating inwards movement creep without
 	var tangent = Vector2(-swing_relative_character_position.y, swing_relative_character_position.x).normalized()
 	velocity = velocity.dot(tangent) * tangent
+	velocity.y -= gravity * delta
 
 func handle_animations():
 	if velocity.x > 0:
