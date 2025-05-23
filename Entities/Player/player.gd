@@ -3,7 +3,7 @@
 
 extends CharacterBody2D
 
-# Constants
+# Constantsdadadwadawdadwa
 @export var speed: float = 450.0
 @export var jump_power: float = 1200.0
 @export var charge_jump_power: float = 1200.0
@@ -179,4 +179,6 @@ func handle_animations():
 		$AnimatedSprite2D.play("run")
 	else:
 		$AnimatedSprite2D.play("idle")
-		
+
+func respawn():
+	global_position = Vector2(-1216, -702)
