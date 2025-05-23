@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://vp2ej0pg74pp" path="res://Stages/Map/LightTileset.png" id="1_urooj"]
 [ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="3_urooj"]
 [ext_resource type="PackedScene" uid="uid://7j43eh2ruib0" path="res://Entities/Socket/Socket.tscn" id="3_wlj70"]
-[ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Traps/spike.tscn" id="4_wlj70"]
+[ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Traps/spike/spike.tscn" id="4_wlj70"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wlj70"]
 texture = ExtResource("1_urooj")
@@ -72,3 +72,12 @@ position = Vector2(-372, -904)
 
 [node name="Spike" parent="." instance=ExtResource("4_wlj70")]
 position = Vector2(-779, -529)
+
+[node name="Spike2" parent="." instance=ExtResource("4_wlj70")]
+position = Vector2(-1230, 38)
+is_moving = true
+
+[node name="Spike3" parent="." instance=ExtResource("4_wlj70")]
+position = Vector2(-956, 42)
+is_moving = true
+horizontal = false
