@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=4 uid="uid://cpktaqex12lsf"]
+[gd_scene load_steps=10 format=4 uid="uid://cpktaqex12lsf"]
 
 [ext_resource type="Texture2D" uid="uid://vp2ej0pg74pp" path="res://Stages/Map/LightTileset.png" id="1_urooj"]
 [ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="3_urooj"]
 [ext_resource type="PackedScene" uid="uid://7j43eh2ruib0" path="res://Entities/Socket/Socket.tscn" id="3_wlj70"]
 [ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Traps/spike/spike.tscn" id="4_wlj70"]
 [ext_resource type="PackedScene" uid="uid://g5ilh2f6xvph" path="res://Traps/lava/lava.tscn" id="5_5bpvm"]
+[ext_resource type="PackedScene" uid="uid://ngefey7r8f8p" path="res://Platform_Tiles/platform/platform.tscn" id="6_unqbx"]
+[ext_resource type="PackedScene" uid="uid://n88x4bl2mo2g" path="res://Platform_Tiles/checkpoint/checkpoint.tscn" id="7_xprr7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wlj70"]
 texture = ExtResource("1_urooj")
@@ -75,13 +77,23 @@ position = Vector2(-372, -904)
 position = Vector2(-779, -529)
 
 [node name="Spike2" parent="." instance=ExtResource("4_wlj70")]
-position = Vector2(-1230, 38)
+position = Vector2(-1225, -63)
 is_moving = true
 
 [node name="Spike3" parent="." instance=ExtResource("4_wlj70")]
-position = Vector2(-907, -125)
+position = Vector2(-1493, -439)
 is_moving = true
-horizontal = false
 
 [node name="Lava" parent="." instance=ExtResource("5_5bpvm")]
 position = Vector2(-553, 31.9999)
+
+[node name="Platform" parent="." instance=ExtResource("6_unqbx")]
+position = Vector2(-85, -430)
+is_moving = true
+
+[node name="Spike4" parent="." instance=ExtResource("4_wlj70")]
+position = Vector2(-915, -238)
+horizontal = false
+
+[node name="Checkpoint" parent="." instance=ExtResource("7_xprr7")]
+position = Vector2(-435, -157)

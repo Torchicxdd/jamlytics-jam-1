@@ -22,7 +22,7 @@ func _ready():
 	start_y = global_position.y
 	update_raycast_direction()
 
-func _process(delta):
+func _physics_process(delta):
 	if is_moving:
 		if horizontal:
 			global_position.x += direction * speed * delta

@@ -21,6 +21,9 @@ var is_jumping = false
 var is_charging = false
 var is_charge_jumping = false
 var is_charge_dashing = false
+var is_on_platform = false
+var platform_speed = null
+var checkpoint = null
 
 # Jumping constants
 
@@ -71,7 +74,8 @@ func _physics_process(delta: float) -> void:
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	
+	if is_on_platform:
+		global_position += platform_speed
 	move_and_slide()
 	handle_animations()
 
@@ -181,4 +185,9 @@ func handle_animations():
 		$AnimatedSprite2D.play("idle")
 
 func respawn():
-	global_position = Vector2(-1216, -702)
+	print(checkpoint)
+	if checkpoint:
+		global_position = checkpoint
+		global_position.x += 150
+	else:
+		global_position = Vector2(-1216, -702)
