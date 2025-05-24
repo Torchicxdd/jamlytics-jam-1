@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://ngefey7r8f8p"]
+
+[ext_resource type="Script" uid="uid://brnqghjtge4nc" path="res://Platform_Tiles/platform/platform.gd" id="1_u1pbg"]
+[ext_resource type="Texture2D" uid="uid://vp2ej0pg74pp" path="res://Stages/Map/LightTileset.png" id="1_wdc64"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u1pbg"]
+size = Vector2(124.627, 180.619)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1jjx"]
+size = Vector2(1.41824, 5.72546)
+
+[sub_resource type="GDScript" id="GDScript_u1pbg"]
+
+[node name="Platform" type="StaticBody2D"]
+scale = Vector2(1.8203, -0.191056)
+script = ExtResource("1_u1pbg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.274676, -4.9916e-06)
+scale = Vector2(1.94394, -0.985273)
+shape = SubResource("RectangleShape2D_u1pbg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wdc64")
+
+[node name="WallRay" type="RayCast2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-25.2706, 225.065)
+scale = Vector2(-69057.6, 10422.7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.000365935, -0.0105457)
+rotation = 3.14159
+scale = Vector2(0.00246242, -0.000725985)
+shape = SubResource("RectangleShape2D_f1jjx")
+script = SubResource("GDScript_u1pbg")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
