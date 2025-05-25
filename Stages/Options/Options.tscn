@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqo0flkmxxm7a"]
+[gd_scene load_steps=3 format=3 uid="uid://cqo0flkmxxm7a"]
 
 [ext_resource type="Texture2D" uid="uid://dugd3i2j145l" path="res://Stages/Options/placeholder.png" id="1_k20fb"]
+[ext_resource type="PackedScene" uid="uid://q66wg7fda3c8" path="res://Stages/Options/Settings_Tab.tscn" id="2_lv7g6"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -14,3 +15,9 @@ grow_vertical = 2
 position = Vector2(961.25, 539.5)
 scale = Vector2(1.02319, 1.26112)
 texture = ExtResource("1_k20fb")
+
+[node name="SettingsTab" parent="Placeholder" instance=ExtResource("2_lv7g6")]
+offset_left = -938.0
+offset_top = -427.0
+offset_right = -914.0
+offset_bottom = -427.0

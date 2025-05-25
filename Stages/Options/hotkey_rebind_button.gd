@@ -49,8 +49,7 @@ func rebind_action_key(event) -> void:
 	set_text_for_key()
 	set_action_name()
 
-
-func _on_button_pressed(toggled_on):
+func _on_button_toggled(toggled_on):
 	if toggled_on:
 		button.text = "Press any key..."
 		set_process_unhandled_key_input(toggled_on)
@@ -60,7 +59,6 @@ func _on_button_pressed(toggled_on):
 				i.button.toggle_mode = false
 				i.set_process_unhandled_key_input(false)
 	else:
-		
 		for i in get_tree().get_nodes_in_group("hotkey_button"):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = true
