@@ -87,7 +87,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 8.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -98,7 +98,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"jump",
-"speed": 6.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -118,8 +118,9 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vweq0"]
-size = Vector2(83, 125)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vweq0"]
+radius = 19.5
+height = 116.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_vweq0")
@@ -132,13 +133,16 @@ visible = false
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_5m37j")
-animation = &"fall"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.60133
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -0.5)
-shape = SubResource("RectangleShape2D_vweq0")
+position = Vector2(-7.5, 4)
+shape = SubResource("CapsuleShape2D_vweq0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-11, 64, -6, 64, -4, 61, -1, 44, 3, 42, 8, 35, 8, 25, 8, 16, 5, 2, 13, -1, 16, -6, 17, -14, 18, -26, 16, -40, 11, -52, 1, -56, -11, -56, -22, -51, -31, -41, -33, -35, -32, -18, -29, -3, -20, 2, -24, 8, -27, 17, -28, 28, -27, 37, -23, 43, -15, 45, -14, 53)
+disabled = true
 
 [node name="Tail" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
