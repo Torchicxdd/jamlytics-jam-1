@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://g5ilh2f6xvph"]
+
+[ext_resource type="Script" uid="uid://0duy746gqphc" path="res://Traps/lava/lava.gd" id="1_ly7dx"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1t01t"]
+load_path = "res://.godot/imported/17e16b541ae0ff5bc4ab77fc15c5f463.jpg-c2d6c115b77ce7b996a48b43c62036e9.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5jusy"]
+size = Vector2(812.171, 366.552)
+
+[node name="Lava" type="Area2D"]
+scale = Vector2(0.21546, 0.135269)
+script = ExtResource("1_ly7dx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+scale = Vector2(2.87781, 1.38206)
+texture = SubResource("CompressedTexture2D_1t01t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.09102, 0.883317)
+scale = Vector2(2.61214, 1.93132)
+shape = SubResource("RectangleShape2D_5jusy")
+
+[connection signal="body_entered" from="." to="." method="player_hit"]

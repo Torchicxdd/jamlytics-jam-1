@@ -27,6 +27,7 @@ project/assembly_name="jamlytics-jam-1"
 [global_group]
 
 Hookable=""
+wall=""
 
 [input]
 
