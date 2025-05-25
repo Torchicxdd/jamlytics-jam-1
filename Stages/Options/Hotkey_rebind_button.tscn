@@ -17,16 +17,17 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_top = -20.0
-offset_right = 269.0
-offset_bottom = 11.0
+offset_right = 900.0
+offset_bottom = 64.0
 grow_vertical = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(110, 30)
+custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 30
 text = "Action"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
@@ -35,9 +36,9 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 85
 
 [node name="Button" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 20
 toggle_mode = true
 text = "Action_KEY"
 
