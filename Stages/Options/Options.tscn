@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqo0flkmxxm7a"]
+
+[ext_resource type="Script" uid="uid://2pu5b1nyedw5" path="res://Stages/Options/options.gd" id="1_0glsu"]
+[ext_resource type="Texture2D" uid="uid://dugd3i2j145l" path="res://Stages/Options/placeholder.png" id="1_k20fb"]
+[ext_resource type="PackedScene" uid="uid://q66wg7fda3c8" path="res://Stages/Options/Settings_Tab.tscn" id="2_lv7g6"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0glsu")
+
+[node name="Placeholder" type="Sprite2D" parent="."]
+position = Vector2(961.25, 539.5)
+scale = Vector2(1.02319, 1.26112)
+texture = ExtResource("1_k20fb")
+
+[node name="Label" type="Label" parent="Placeholder"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1047.71
+offset_top = -420.658
+offset_right = -816.706
+offset_bottom = -351.658
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Options"
+horizontal_alignment = 1
+
+[node name="SettingsTab" parent="Placeholder" instance=ExtResource("2_lv7g6")]
+offset_left = -896.0
+offset_top = -447.0
+offset_right = -891.0
+offset_bottom = -453.0
+
+[node name="Button" type="Button" parent="Placeholder"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1047.71
+offset_top = -540.39
+offset_right = -826.706
+offset_bottom = -490.39
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Back"
+
+[connection signal="pressed" from="Placeholder/Button" to="." method="_on_button_pressed"]
