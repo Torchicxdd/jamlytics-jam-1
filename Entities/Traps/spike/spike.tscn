@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6d3slorid4pf"]
 
-[ext_resource type="Script" uid="uid://crv2hfmi15sd7" path="res://Traps/spike/spike.gd" id="1_bxdqp"]
-[ext_resource type="Texture2D" uid="uid://dobyr6qtsc1qk" path="res://Assets/spike.png" id="1_io318"]
+[ext_resource type="Script" uid="uid://crv2hfmi15sd7" path="res://Entities/Traps/spike/spike.gd" id="1_bxdqp"]
+[ext_resource type="Texture2D" uid="uid://bwq0qp2djskup" path="res://Entities/Traps/spike/spike.png" id="2_amryr"]
 
 [node name="Spike" type="Area2D"]
 collision_layer = 2
 script = ExtResource("1_bxdqp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_io318")
+texture = ExtResource("2_amryr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(2, 7)

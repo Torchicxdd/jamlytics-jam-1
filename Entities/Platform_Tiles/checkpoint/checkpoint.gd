@@ -5,8 +5,8 @@ extends Area2D
 var active := false
 
 # preload the new image
-var active_texture = preload("res://Platform_Tiles/checkpoint/images.steamusercontent - Copy.jpg")
-var inactive_texture = preload("res://Platform_Tiles/checkpoint/images.steamusercontent.jpg")
+var active_texture = preload("res://Entities/Platform_Tiles/checkpoint/images.steamusercontent - Copy.jpg")
+var inactive_texture = preload("res://Entities/Platform_Tiles/checkpoint/images.steamusercontent.jpg")
 
 func _on_body_entered(body):
 	if body.name == "Player":

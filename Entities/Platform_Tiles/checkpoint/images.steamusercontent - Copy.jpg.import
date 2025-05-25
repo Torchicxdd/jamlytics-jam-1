@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3fvhbv8gm43l"
-path="res://.godot/imported/images.steamusercontent.jpg-55255499d6c8b43d896bfce631549c5d.ctex"
+uid="uid://divsd06af25s2"
+path="res://.godot/imported/images.steamusercontent - Copy.jpg-ae500b8cf2bc4e3f10eab89b5ec3487e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Platform_Tiles/checkpoint/images.steamusercontent.jpg"
-dest_files=["res://.godot/imported/images.steamusercontent.jpg-55255499d6c8b43d896bfce631549c5d.ctex"]
+source_file="res://Entities/Platform_Tiles/checkpoint/images.steamusercontent - Copy.jpg"
+dest_files=["res://.godot/imported/images.steamusercontent - Copy.jpg-ae500b8cf2bc4e3f10eab89b5ec3487e.ctex"]
 
 [params]
 

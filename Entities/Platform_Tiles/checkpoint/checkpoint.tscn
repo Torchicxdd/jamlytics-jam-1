@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://n88x4bl2mo2g"]
 
-[ext_resource type="Script" uid="uid://d4de33jxlbxh7" path="res://Platform_Tiles/checkpoint/checkpoint.gd" id="1_ojb0g"]
-[ext_resource type="Texture2D" uid="uid://c3fvhbv8gm43l" path="res://Platform_Tiles/checkpoint/images.steamusercontent.jpg" id="2_yp2w0"]
+[ext_resource type="Script" uid="uid://d4de33jxlbxh7" path="res://Entities/Platform_Tiles/checkpoint/checkpoint.gd" id="1_ojb0g"]
+[ext_resource type="Texture2D" uid="uid://c3fvhbv8gm43l" path="res://Entities/Platform_Tiles/checkpoint/images.steamusercontent.jpg" id="2_yp2w0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ya6eo"]
 size = Vector2(73, 64)
