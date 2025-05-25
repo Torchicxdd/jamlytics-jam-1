@@ -36,8 +36,10 @@ var global_socket_position: Vector2
 var swing_angle: float
 var swing_length: float
 var angular_velocity: float = 0.0
+var prev_angular_velocity: float = 0
+var swing_direction_initialized: bool = false
 @export var swing_energy_loss: float = 0.99
-	
+@export var detach_swing_boost: Vector2 = Vector2(450, 0)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -49,12 +51,15 @@ func _physics_process(delta: float) -> void:
 			if collider.is_in_group("Hookable") and collider is StaticBody2D:
 				global_socket_position = collider.global_position
 				is_swinging = true
+				is_charge_dashing = false
+				is_charge_jumping = false
 				var swing_relative_character_position = global_position - global_socket_position
 				swing_angle = atan2(swing_relative_character_position.x, swing_relative_character_position.y)
 				swing_length = global_position.distance_to(global_socket_position)
 				
 	elif Input.is_action_just_released("left_click"):
 		is_swinging = false
+		swing_direction_initialized = false
 	
 	handle_charge_inputs(delta)
 	
@@ -76,6 +81,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 	if is_on_platform:
 		global_position += platform_speed
+	
 	move_and_slide()
 	handle_animations()
 
@@ -151,14 +157,20 @@ func swinging_process_handler(delta):
 	var tangent_dir = Vector2(cos(swing_angle), -sin(swing_angle))
 	var tangential_speed = velocity.dot(tangent_dir)
 	angular_velocity = tangential_speed / swing_length
+	prev_angular_velocity = angular_velocity
 	
 	# Calculate new velocity
 	var angular_acceleration = -(gravity * swing_gravitational_multiplier / swing_length) * sin(swing_angle)
-	angular_velocity += angular_acceleration * delta
-	angular_velocity *= swing_energy_loss
-	if angular_velocity == 0:
-		is_swinging = false
+	var applied_angular_velocity = angular_acceleration * delta
 	
+	if sign(prev_angular_velocity) == sign(applied_angular_velocity):
+		# Swinging in the same direction for the first time
+		swing_direction_initialized = true
+	
+	# Apply new calculated velocity
+	angular_velocity += applied_angular_velocity
+	angular_velocity *= swing_energy_loss
+	 
 	swing_angle += angular_velocity * delta
 	velocity = Vector2(cos(swing_angle), -sin(swing_angle)) * swing_length * angular_velocity
 	
@@ -167,6 +179,11 @@ func swinging_process_handler(delta):
 	var tangent = Vector2(-swing_relative_character_position.y, swing_relative_character_position.x).normalized()
 	velocity = velocity.dot(tangent) * tangent
 	velocity.y -= gravity * delta
+	
+	# Check to see when player will reach max opposite direction of swing
+	if sign(prev_angular_velocity) != sign(angular_velocity) and swing_direction_initialized == true:
+		is_swinging = false
+		swing_direction_initialized = false
 
 func handle_animations():
 	if velocity.x > 0:
@@ -185,7 +202,6 @@ func handle_animations():
 		$AnimatedSprite2D.play("idle")
 
 func respawn():
-	print(checkpoint)
 	if checkpoint:
 		global_position = checkpoint
 		global_position.x += 150
