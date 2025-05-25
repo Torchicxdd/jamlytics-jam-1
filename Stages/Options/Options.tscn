@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cqo0flkmxxm7a"]
+[gd_scene load_steps=2 format=3 uid="uid://cqo0flkmxxm7a"]
+
+[ext_resource type="Texture2D" uid="uid://dugd3i2j145l" path="res://Stages/Options/placeholder.png" id="1_k20fb"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -7,3 +9,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Placeholder" type="Sprite2D" parent="."]
+position = Vector2(961.25, 539.5)
+scale = Vector2(1.02319, 1.26112)
+texture = ExtResource("1_k20fb")
