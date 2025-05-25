@@ -127,6 +127,7 @@ swing_gravitational_multiplier = 1.75
 swing_energy_loss = 0.999
 
 [node name="Plug" parent="." instance=ExtResource("4_1des2")]
+visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
