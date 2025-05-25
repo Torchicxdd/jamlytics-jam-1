@@ -26,11 +26,11 @@ script = ExtResource("1_4oddn")
 layout_mode = 0
 offset_right = 1400.0
 offset_bottom = 100.0
-theme_override_constants/separation = 24
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="audio_name" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(115, 30)
+custom_minimum_size = Vector2(300, 30)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Master Volume"
@@ -52,6 +52,7 @@ layout_mode = 2
 theme_override_constants/separation = 100
 
 [node name="audio_num" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "100"
