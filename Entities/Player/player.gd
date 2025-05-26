@@ -69,11 +69,9 @@ func _physics_process(delta: float) -> void:
 		$RayCast2D.force_raycast_update()
 		var local_socket_position = to_local(global_socket_position)
 		$Tail.set_point_position(1, local_socket_position)
-		$Plug.position = local_socket_position
 		swinging_process_handler(delta)
 	else:
 		$Tail.set_point_position(1, Vector2.ZERO)
-		$Plug.position = Vector2.ZERO
 		character_process_handler(delta)
 	
 	# Apply gravity
