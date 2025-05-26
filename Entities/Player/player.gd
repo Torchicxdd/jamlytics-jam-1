@@ -7,8 +7,8 @@ extends CharacterBody2D
 @export var speed: float = 450.0
 @export var jump_power: float = 1200.0
 @export var charge_jump_power: float = 1200.0
-@export var charge_dash_power: int = 1
-@export var max_charge_dash_power: int = 5
+@export var charge_dash_power: float = 1
+@export var max_charge_dash_power: float = 3.5
 @export var max_charge_jump_power: float = 2000.0
 @export var max_charge_time: float = 1.0
 @export var swing_gravitational_multiplier: float = 2
@@ -43,19 +43,20 @@ var swing_direction_initialized: bool = false
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
-		global_hook_position = get_global_mouse_position()
-		$RayCast2D.target_position = to_local(global_hook_position)
-		$RayCast2D.force_raycast_update()
-		if $RayCast2D.is_colliding():
-			var collider = $RayCast2D.get_collider()
-			if collider.is_in_group("Hookable") and collider is StaticBody2D:
-				global_socket_position = collider.global_position
-				is_swinging = true
-				is_charge_dashing = false
-				is_charge_jumping = false
-				var swing_relative_character_position = global_position - global_socket_position
-				swing_angle = atan2(swing_relative_character_position.x, swing_relative_character_position.y)
-				swing_length = global_position.distance_to(global_socket_position)
+		if not is_on_floor():
+			global_hook_position = get_global_mouse_position()
+			$RayCast2D.target_position = to_local(global_hook_position)
+			$RayCast2D.force_raycast_update()
+			if $RayCast2D.is_colliding():
+				var collider = $RayCast2D.get_collider()
+				if collider.is_in_group("Hookable") and collider is StaticBody2D:
+					global_socket_position = collider.global_position
+					is_swinging = true
+					is_charge_dashing = false
+					is_charge_jumping = false
+					var swing_relative_character_position = global_position - global_socket_position
+					swing_angle = atan2(swing_relative_character_position.x, swing_relative_character_position.y)
+					swing_length = global_position.distance_to(global_socket_position)
 				
 	elif Input.is_action_just_released("left_click"):
 		is_swinging = false
@@ -144,7 +145,7 @@ func handle_charge_inputs(delta):
 		if current_charge_time >= max_charge_time:
 			current_charge_time = max_charge_time
 		charge_jump_power = lerp(900.0, max_charge_jump_power, current_charge_time / max_charge_time)
-		charge_dash_power = lerp(2, max_charge_dash_power, current_charge_time / max_charge_time)
+		charge_dash_power = lerp(2.0, max_charge_dash_power, current_charge_time / max_charge_time)
 	
 	$Camera2D/ChargeBar.value = current_charge_time / max_charge_time
 	
@@ -186,18 +187,20 @@ func swinging_process_handler(delta):
 func handle_animations():
 	if velocity.x > 0:
 		$AnimatedSprite2D.flip_h = true
+		$ObstacleCollision/CollisionPolygon2D.scale.x = -1
 	if velocity.x < 0:
 		$AnimatedSprite2D.flip_h = false
+		$ObstacleCollision/CollisionPolygon2D.scale.x = 1
 		
 	if not is_on_floor():
 		if velocity.y < 0:
-			$AnimatedSprite2D.play("jump")
-		elif velocity.y > 0:
-			$AnimatedSprite2D.play("fall")
+			$AnimationPlayer.play("jump")
+		elif velocity.y >= 0:
+			$AnimationPlayer.play("fall")
 	elif velocity.x != 0:
-		$AnimatedSprite2D.play("run")
+		$AnimationPlayer.play("run")
 	else:
-		$AnimatedSprite2D.play("idle")
+		$AnimationPlayer.play("idle")
 
 func respawn():
 	if checkpoint:
