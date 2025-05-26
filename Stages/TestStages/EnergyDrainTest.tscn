@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=4 uid="uid://c51obfpisdijo"]
+
+[ext_resource type="TileSet" uid="uid://kta41g8k8m8w" path="res://Assets/Tilesets/DarkTileset/DarkTileset.tres" id="1_22rac"]
+[ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="2_njkhw"]
+[ext_resource type="PackedScene" uid="uid://7j43eh2ruib0" path="res://Entities/Socket/Socket.tscn" id="3_7vwki"]
+[ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Entities/Traps/spike/spike.tscn" id="4_14nr7"]
+
+[node name="MonoDirectionSwing" type="Node2D"]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Node"]
+tile_map_data = PackedByteArray("AAD6/wAAAQABAAAAAAD7/wAAAQABAAAAAAD8/wAAAQABAAAAAAD9/wAAAQABAAAAAAD+/wAAAQABAAAAAAD//wAAAQABAAAAAAAAAAAAAQABAAAAAAABAAAAAQABAAAAAAACAAAAAQABAAAAAAADAAAAAQABAAAAAAAEAAAAAQABAAAAAAAFAAAAAQABAAAAAAAGAAAAAQABAAAAAAAHAAAAAQABAAAAAAAIAAAAAQABAAAAAAAJAAAAAQABAAAAAAAKAAAAAQABAAAAAAALAAAAAQABAAAAAAAMAAAAAQABAAAAAAANAAAAAQABAAAAAAAOAAAAAQABAAAAAAAPAAAAAQABAAAAAAD5/wAAAQABAAAAAAD4/wAAAQABAAAAAAD3/wAAAQABAAAAAAD2/wAAAQABAAAAAAD1/wAAAQABAAAAAADr/wAAAQABAAAAAADs/wAAAQABAAAAAADt/wAAAQABAAAAAADu/wAAAQABAAAAAADv/wAAAQABAAAAAADw/wAAAQABAAAAAADx/wAAAQABAAAAAADy/wAAAQABAAAAAADz/wAAAQABAAAAAAD0/wAAAQABAAAAAAAQAAAAAQABAAAAAAARAAAAAQABAAAAAAASAAAAAQABAAAAAAATAAAAAQABAAAAAAAUAAAAAQABAAAAAAAVAAAAAQABAAAAAAAWAAAAAQABAAAAAAA=")
+tile_set = ExtResource("1_22rac")
+
+[node name="Player" parent="." instance=ExtResource("2_njkhw")]
+position = Vector2(-128, -86)
+detach_swing_boost = Vector2(2000, 0)
+
+[node name="Socket" parent="." instance=ExtResource("3_7vwki")]
+position = Vector2(2, -708)
+
+[node name="Socket2" parent="." instance=ExtResource("3_7vwki")]
+position = Vector2(1003, -708)
+
+[node name="Socket3" parent="." instance=ExtResource("3_7vwki")]
+position = Vector2(-919, -716)
+
+[node name="Spike" parent="." instance=ExtResource("4_14nr7")]
+position = Vector2(-484, -25)

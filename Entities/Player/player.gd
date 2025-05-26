@@ -15,6 +15,10 @@ extends CharacterBody2D
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# Health bar
+@export var health: int = 6
+var health_list: Array[TextureRect]
+
 # Character states
 var is_swinging = false
 var is_jumping = false
@@ -41,6 +45,12 @@ var swing_direction_initialized: bool = false
 @export var swing_energy_loss: float = 0.99
 @export var detach_swing_boost: Vector2 = Vector2(450, 0)
 
+func _ready() -> void:
+	# Initialize health bar
+	var health_bar = $Camera2D/HealthBar
+	for i in range(health):
+		health_list.append(health_bar.get_node("Health" + str(i + 1)))
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		global_hook_position = get_global_mouse_position()
@@ -56,6 +66,7 @@ func _physics_process(delta: float) -> void:
 				var swing_relative_character_position = global_position - global_socket_position
 				swing_angle = atan2(swing_relative_character_position.x, swing_relative_character_position.y)
 				swing_length = global_position.distance_to(global_socket_position)
+				heal(1)  # Heal on swing start
 				
 	elif Input.is_action_just_released("left_click"):
 		is_swinging = false
@@ -124,6 +135,7 @@ func handle_charge_inputs(delta):
 		is_charge_dashing = false
 		is_swinging = false
 		velocity.y = -(charge_jump_power)
+		take_damage(1)
 		
 	if Input.is_action_just_released("charge") and not is_on_floor() and not is_charge_dashing:
 		is_jumping = false
@@ -131,6 +143,7 @@ func handle_charge_inputs(delta):
 		is_charge_dashing = true
 		is_swinging = false
 		velocity.y = -(charge_jump_power/2)
+		take_damage(1)
 		
 	# Handle charging jumps
 	if Input.is_action_pressed("charge"):
@@ -199,9 +212,29 @@ func handle_animations():
 	else:
 		$AnimatedSprite2D.play("idle")
 
+func take_damage(damage: int) -> void:
+	health -= damage
+	update_health_bar()
+	if health <= 0:
+		respawn()
+		
+
+func heal(damage: int) -> void:
+	health += damage
+	if health > 6:
+		health = 6
+
+	update_health_bar()
+
+func update_health_bar() -> void:
+	for i in range(health_list.size()):
+		health_list[i].visible = i < health
+
 func respawn():
 	if checkpoint:
 		global_position = checkpoint
 		global_position.x += 150
 	else:
 		global_position = Vector2(-1216, -702)
+	
+	heal(6)
