@@ -1,3 +1,0 @@
-[gd_scene format=3 uid="uid://cgv3hnluhed"]
-
-[node name="TailJoint" type="PinJoint2D"]
