@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://c51obfpisdijo"]
+[gd_scene load_steps=6 format=4 uid="uid://c51obfpisdijo"]
 
 [ext_resource type="TileSet" uid="uid://kta41g8k8m8w" path="res://Assets/Tilesets/DarkTileset/DarkTileset.tres" id="1_22rac"]
 [ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="2_njkhw"]
 [ext_resource type="PackedScene" uid="uid://7j43eh2ruib0" path="res://Entities/Socket/Socket.tscn" id="3_7vwki"]
 [ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Entities/Traps/spike/spike.tscn" id="4_14nr7"]
+[ext_resource type="Texture2D" uid="uid://ct2wf3hjlglq3" path="res://Assets/parallax/Untitled_Artwork.png" id="5_njkhw"]
 
 [node name="MonoDirectionSwing" type="Node2D"]
 
@@ -32,5 +33,15 @@ position = Vector2(-484, -25)
 [node name="HealthLossTimer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-1326, -1921)
+scale = Vector2(1.78611, 1)
+texture = ExtResource("5_njkhw")
+centered = false
 
 [connection signal="timeout" from="HealthLossTimer" to="Player" method="_on_health_loss_timer_timeout"]
