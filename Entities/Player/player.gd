@@ -233,24 +233,6 @@ func update_health_bar() -> void:
 	for i in range(health_list.size()):
 		health_list[i].visible = i < health
 
-func take_damage(damage: int) -> void:
-	health -= damage
-	update_health_bar()
-	if health <= 0:
-		respawn()
-		
-
-func heal(damage: int) -> void:
-	health += damage
-	if health > 6:
-		health = 6
-
-	update_health_bar()
-
-func update_health_bar() -> void:
-	for i in range(health_list.size()):
-		health_list[i].visible = i < health
-
 func respawn():
 	if checkpoint:
 		global_position = checkpoint
