@@ -28,3 +28,9 @@ position = Vector2(-919, -716)
 
 [node name="Spike" parent="." instance=ExtResource("4_14nr7")]
 position = Vector2(-484, -25)
+
+[node name="HealthLossTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="HealthLossTimer" to="Player" method="_on_health_loss_timer_timeout"]

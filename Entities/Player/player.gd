@@ -50,6 +50,9 @@ func _ready() -> void:
 	var health_bar = $Camera2D/HealthBar
 	for i in range(health):
 		health_list.append(health_bar.get_node("Health" + str(i + 1)))
+	
+	# Initialize health loss interval timer
+	
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -241,3 +244,8 @@ func respawn():
 		global_position = Vector2(-1216, -702)
 	
 	heal(6)
+
+# called by whatever timer that is in the stage that the player is in
+# make sure to set up the signal per stage to whatver time u want
+func _on_health_loss_timer_timeout():
+	take_damage(1)
