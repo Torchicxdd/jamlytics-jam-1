@@ -77,6 +77,14 @@ charge={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Terrain"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Hookable"
+2d_physics/layer_4="Obstacles"
+2d_physics/layer_5="Interactable"
+
 [physics]
 
 2d/run_on_separate_thread=true
