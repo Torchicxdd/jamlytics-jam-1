@@ -1,0 +1,80 @@
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://c5hfooh7gfuyy"]
+
+[ext_resource type="FontFile" uid="uid://b26i5rrvivsrq" path="res://Assets/FreckleFace-Regular.ttf" id="1_p0ucp"]
+[ext_resource type="Texture2D" uid="uid://dl2ehp5slxbm1" path="res://themes/BtnNormalbg.png" id="2_balt5"]
+[ext_resource type="Texture2D" uid="uid://cn4lguttlxwqu" path="res://themes/BtnHoverbg.png" id="2_f7v51"]
+[ext_resource type="Texture2D" uid="uid://bsllx6r6qpti4" path="res://themes/BtnPressedbg.png" id="4_p0ucp"]
+[ext_resource type="Texture2D" uid="uid://dx1m6nv7d6srt" path="res://themes/tabsbg.png" id="5_ikh11"]
+[ext_resource type="Texture2D" uid="uid://bb2ag0aepbwfw" path="res://themes/BtnActivebg.png" id="6_k15vc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p0ucp"]
+texture = ExtResource("2_f7v51")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7v51"]
+texture = ExtResource("2_balt5")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ikh11"]
+texture = ExtResource("4_p0ucp")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k15vc"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+texture = ExtResource("5_ikh11")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k15vc"]
+content_margin_left = 130.0
+content_margin_top = 14.0
+content_margin_right = 130.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3sc58"]
+content_margin_left = 130.0
+content_margin_top = 14.0
+content_margin_right = 130.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3sc58"]
+content_margin_left = 130.0
+content_margin_top = 14.0
+content_margin_right = 130.0
+content_margin_bottom = 12.0
+texture = ExtResource("6_k15vc")
+texture_margin_left = 65.0
+texture_margin_top = 6.0
+texture_margin_right = 65.0
+texture_margin_bottom = 6.0
+expand_margin_top = 6.0
+expand_margin_bottom = 6.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ikh11"]
+content_margin_left = 130.0
+content_margin_top = 12.0
+content_margin_right = 130.0
+content_margin_bottom = 12.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(0.054902, 0.054902, 0.054902, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_p0ucp")
+Button/styles/hover = SubResource("StyleBoxTexture_p0ucp")
+Button/styles/normal = SubResource("StyleBoxTexture_f7v51")
+Button/styles/pressed = SubResource("StyleBoxTexture_ikh11")
+TabContainer/colors/font_selected_color = Color(0.054902, 0.054902, 0.054902, 1)
+TabContainer/colors/font_unselected_color = Color(1, 1, 1, 1)
+TabContainer/font_sizes/font_size = 32
+TabContainer/styles/panel = SubResource("StyleBoxTexture_k15vc")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_k15vc")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxEmpty_3sc58")
+TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_3sc58")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_ikh11")

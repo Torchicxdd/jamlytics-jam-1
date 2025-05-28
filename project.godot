@@ -30,6 +30,10 @@ Hookable=""
 wall=""
 Obstacle=""
 
+[gui]
+
+theme/custom_font="uid://b26i5rrvivsrq"
+
 [input]
 
 move_left={
