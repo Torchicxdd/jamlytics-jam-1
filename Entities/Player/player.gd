@@ -19,8 +19,8 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Health bar
 var health: int = 6
+var health_constant: int = 6
 @export var max_health: int = 6
-var health_list: Array[TextureRect]
 
 # Character states
 var is_swinging = false
@@ -54,9 +54,7 @@ var used_socket: Array[Node] = []
 
 func _ready() -> void:
 	# Initialize health bar
-	var health_bar = $Camera2D/HBoxContainer/VBoxContainer/HealthBar
-	for i in range(health):
-		health_list.append(health_bar.get_node("Health" + str(i + 1)))
+	add_health_bars(health)
 	
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -256,14 +254,14 @@ func take_damage(damage: int) -> void:
 
 func heal(damage: int) -> void:
 	health += damage
-	if health > 6:
-		health = 6
+	if health > health_constant:
+		health = health_constant
 
 	update_health_bar()
 
 func update_health_bar() -> void:
-	for i in range(health_list.size()):
-		health_list[i].visible = i < health
+	for i in range($Camera2D/HBoxContainer/VBoxContainer/HealthBar.get_child_count()):
+		$Camera2D/HBoxContainer/VBoxContainer/HealthBar.get_child(i).visible = i < health
 
 func respawn():
 	if checkpoint:
@@ -272,7 +270,6 @@ func respawn():
 		global_position = Vector2(-1216, -702)
 	
 	reset_values()
-	heal(6)
 
 # called by whatever timer that is in the stage that the player is in
 # make sure to set up the signal per stage to whatver time u want
@@ -285,8 +282,22 @@ func _on_jump_buffer_timer_timeout() -> void:
 func _on_coyote_timer_timeout() -> void:
 	jump_available = false
 
+func add_health_bars(amount: int):
+	for i in amount:
+		$Camera2D/HBoxContainer/VBoxContainer/HealthBar.add_health()
+
+func clear_health_bars():
+	for i in $Camera2D/HBoxContainer/VBoxContainer/HealthBar.get_children():
+		i.queue_free()
+
+func reset_health():
+	health = health_constant
+	clear_health_bars()
+	add_health_bars(health_constant)
+
 func reset_values():
-	health = 6
+	health = health_constant
+	add_health_bars(health)
 	current_charge_time = 0.0
 	is_swinging = false
 	is_jumping = false

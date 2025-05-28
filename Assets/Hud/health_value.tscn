@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd77ehpfm3ksm"]
+
+[ext_resource type="Texture2D" uid="uid://cwkkeet8y4qro" path="res://Assets/Hud/HealthbarIcon.png" id="1_dav8a"]
+[ext_resource type="Script" uid="uid://da4mp5a1cocch" path="res://Assets/Hud/health_bar.gd" id="2_mrgvm"]
+
+[node name="health_value" type="TextureRect"]
+texture = ExtResource("1_dav8a")
+stretch_mode = 3
+script = ExtResource("2_mrgvm")
