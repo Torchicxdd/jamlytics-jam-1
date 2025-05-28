@@ -268,7 +268,6 @@ func update_health_bar() -> void:
 func respawn():
 	if checkpoint:
 		global_position = checkpoint
-		global_position.x += 150
 	else:
 		global_position = Vector2(-1216, -702)
 	

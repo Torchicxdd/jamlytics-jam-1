@@ -10,11 +10,14 @@ var inactive_texture = preload("res://Entities/Platform_Tiles/checkpoint/images.
 
 func _on_body_entered(body):
 	if body.name == "Player":
+		body.health = 6
+		body.update_health_bar()
 		if active:
-				body.checkpoint = null
-				print(body.checkpoint)
-				sprite.texture = inactive_texture
-				active = false
+				pass
+				#body.checkpoint = null
+				#print(body.checkpoint)
+				#sprite.texture = inactive_texture
+				#active = false
 		else:
 				body.checkpoint = global_position
 				print(body.checkpoint)

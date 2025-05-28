@@ -15,7 +15,7 @@ func update_raycast_direction():
 	if horizontal:
 		wall_ray.target_position  = Vector2(30 * direction, 0)
 	else:
-		wall_ray.target_position  = Vector2(0, 30 * direction)
+		wall_ray.target_position  = Vector2(0, -30 * direction)
 
 func _ready():
 	start_x = global_position.x
