@@ -1,5 +1,5 @@
 extends Area2D
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Obstacles"):
-		pass # Do some death handler
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Obstacle"):
+		get_parent().respawn()
