@@ -12,6 +12,7 @@ extends CharacterBody2D
 @export var max_charge_jump_power: float = 2000.0
 @export var max_charge_time: float = 1.0
 @export var swing_gravitational_multiplier: float = 2
+@export var jump_buffer_time: float = 0.1
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -29,6 +30,7 @@ var is_charge_dashing = false
 var is_on_platform = false
 var platform_speed = null
 var checkpoint = null
+var jump_buffer = false
 
 # Charging constants
 var current_charge_time = 0.0
@@ -104,6 +106,10 @@ func character_process_handler(delta):
 		is_jumping = false
 		is_charge_jumping = false
 		is_charge_dashing = false
+		# If the jump was buffered, jump immediately
+		if jump_buffer:
+			jump()
+			jump_buffer = false
 	
 	horizontal_movement_handler()
 	vertical_movement_handler(delta)
@@ -125,12 +131,13 @@ func horizontal_movement_handler():
 
 func vertical_movement_handler(delta):
 	# First started jumping
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		is_jumping = true
-		is_charge_jumping = false
-		is_charge_dashing = false
-		is_swinging = false
-		velocity.y = -(jump_power)
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor():
+			jump()
+		else:
+			# Jump buffer logic
+			jump_buffer = true
+			get_tree().create_timer(jump_buffer_time).timeout.connect(_on_jump_buffer_timer_timeout)
 	
 func handle_charge_inputs(delta):
 	if Input.is_action_just_released("charge") and is_on_floor() and not is_charge_jumping:
@@ -218,6 +225,13 @@ func handle_animations():
 	else:
 		$AnimationPlayer.play("idle")
 
+func jump() -> void:
+	is_jumping = true
+	is_charge_jumping = false
+	is_charge_dashing = false
+	is_swinging = false
+	velocity.y = -(jump_power)
+
 func take_damage(damage: int) -> void:
 	health -= damage
 	update_health_bar()
@@ -250,6 +264,9 @@ func respawn():
 # make sure to set up the signal per stage to whatver time u want
 func _on_health_loss_timer_timeout():
 	take_damage(1)
+
+func _on_jump_buffer_timer_timeout() -> void:
+	jump_buffer = false
 
 func reset_values():
 	health = 6
