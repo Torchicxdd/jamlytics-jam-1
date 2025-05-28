@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d3nuw6bx6tyxs" path="res://Entities/Player/Body/PlayerSpritesheetV1.png" id="3_vweq0"]
 [ext_resource type="Texture2D" uid="uid://dblerr3830skn" path="res://Assets/Hud/HudIcon.png" id="4_t38ms"]
 [ext_resource type="Texture2D" uid="uid://dyyba5s66uk25" path="res://Assets/Hud/EnergyIcon.png" id="5_hj1c0"]
-[ext_resource type="Texture2D" uid="uid://cwkkeet8y4qro" path="res://Assets/Hud/HealthbarIcon.png" id="6_t38ms"]
+[ext_resource type="Script" uid="uid://dfpyff4746gah" path="res://Entities/Player/health_bar.gd" id="6_x44r4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1des2"]
 atlas = ExtResource("3_vweq0")
@@ -400,36 +400,7 @@ theme_override_constants/separation = 6
 
 [node name="HealthBar" type="HBoxContainer" parent="Camera2D/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-
-[node name="Health1" type="TextureRect" parent="Camera2D/HBoxContainer/VBoxContainer/HealthBar"]
-layout_mode = 2
-texture = ExtResource("6_t38ms")
-stretch_mode = 3
-
-[node name="Health2" type="TextureRect" parent="Camera2D/HBoxContainer/VBoxContainer/HealthBar"]
-layout_mode = 2
-texture = ExtResource("6_t38ms")
-stretch_mode = 3
-
-[node name="Health3" type="TextureRect" parent="Camera2D/HBoxContainer/VBoxContainer/HealthBar"]
-layout_mode = 2
-texture = ExtResource("6_t38ms")
-stretch_mode = 3
-
-[node name="Health4" type="TextureRect" parent="Camera2D/HBoxContainer/VBoxContainer/HealthBar"]
-layout_mode = 2
-texture = ExtResource("6_t38ms")
-stretch_mode = 3
-
-[node name="Health5" type="TextureRect" parent="Camera2D/HBoxContainer/VBoxContainer/HealthBar"]
-layout_mode = 2
-texture = ExtResource("6_t38ms")
-stretch_mode = 3
-
-[node name="Health6" type="TextureRect" parent="Camera2D/HBoxContainer/VBoxContainer/HealthBar"]
-layout_mode = 2
-texture = ExtResource("6_t38ms")
-stretch_mode = 3
+script = ExtResource("6_x44r4")
 
 [node name="ChargeBar" type="ProgressBar" parent="Camera2D/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(220, 8)

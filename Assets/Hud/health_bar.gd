@@ -1,0 +1,1 @@
+class_name HealthValue extends TextureRect
