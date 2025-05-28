@@ -1,8 +1,8 @@
 extends Control
 
 @onready var audio_name = $HBoxContainer/audio_name as Label
-@onready var audio_num = $HBoxContainer/audio_num as Label
-@onready var slider = $HBoxContainer/HSlider as HSlider
+@onready var audio_num = $audio_num as Label
+@onready var slider = $HSlider as HSlider
 
 @export_enum("Master", "Music", "Sfx") var bus_name : String
 
@@ -20,7 +20,7 @@ func set_audio_name_label_text() -> void:
 	audio_name.text = str(bus_name) + " Volume"
 	
 func set_audio_num_text() -> void:
-	audio_num.text = str(slider.value * 100)
+	audio_num.text = str(int(slider.value * 100))
 	
 func set_slider_value() -> void:
 	slider.value = db_to_linear(AudioServer.get_bus_volume_db(bus_index))

@@ -1,12 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://wny33aryu7bb"]
+[gd_scene load_steps=7 format=3 uid="uid://wny33aryu7bb"]
 
-[ext_resource type="Texture2D" uid="uid://du5soeko2qh88" path="res://Stages/Home/placeholder.png" id="1_wx2nd"]
+[ext_resource type="Texture2D" uid="uid://w1bad8hifykw" path="res://Stages/Home/homebg.png" id="2_afvt6"]
 [ext_resource type="Script" uid="uid://b4xsdf0x3sfxl" path="res://Stages/Home/Home.gd" id="2_bf5x6"]
+[ext_resource type="Texture2D" uid="uid://cd5n2ptc30m3e" path="res://Stages/Home/logo.png" id="3_afvt6"]
+[ext_resource type="Theme" uid="uid://c5hfooh7gfuyy" path="res://themes/base_theme.tres" id="4_yvsri"]
+[ext_resource type="Texture2D" uid="uid://bb2ag0aepbwfw" path="res://themes/BtnActivebg.png" id="5_0757m"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bf5x6"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afvt6"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tcnsl"]
+texture = ExtResource("5_0757m")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [node name="Home" type="Control"]
 layout_mode = 3
@@ -17,88 +20,61 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_bf5x6")
 
-[node name="Placeholder" type="Sprite2D" parent="."]
-position = Vector2(964, 541)
-texture = ExtResource("1_wx2nd")
-
-[node name="Label" type="Label" parent="Placeholder"]
-offset_left = -847.0
-offset_top = -272.0
-offset_right = -393.0
-offset_bottom = -169.0
-theme_override_font_sizes/font_size = 75
-text = "GAME NAME"
-
-[node name="New Game" type="Button" parent="Placeholder"]
-offset_left = -837.0
-offset_top = -138.0
-offset_right = -626.0
-offset_bottom = -83.0
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bf5x6")
-text = "New Game"
-alignment = 0
-
-[node name="Options" type="Button" parent="Placeholder"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -839.0
-offset_top = -618.0
-offset_right = -658.0
-offset_bottom = -563.0
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bf5x6")
+texture = ExtResource("2_afvt6")
+stretch_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_afvt6")
+stretch_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="New Game" type="Button" parent="VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(329, 65)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("4_yvsri")
+theme_override_colors/font_color = Color(0.054902, 0.054902, 0.054902, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_tcnsl")
+text = "New Game"
+
+[node name="Options" type="Button" parent="VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(329, 65)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("4_yvsri")
 text = "Options"
-alignment = 0
 
-[node name="Quit Game" type="Button" parent="Placeholder"]
-offset_left = -838.0
-offset_top = -16.0
-offset_right = -630.0
-offset_bottom = 39.0
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_afvt6")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_bf5x6")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bf5x6")
+[node name="Quit Game" type="Button" parent="VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(329, 65)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("4_yvsri")
 text = "Quit Game"
-alignment = 0
 
-[connection signal="pressed" from="Placeholder/New Game" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="Placeholder/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="Placeholder/Quit Game" to="." method="_on_quit_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer2/New Game" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer2/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer2/Quit Game" to="." method="_on_quit_game_pressed"]

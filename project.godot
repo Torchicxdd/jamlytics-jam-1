@@ -29,6 +29,10 @@ project/assembly_name="jamlytics-jam-1"
 Hookable=""
 wall=""
 
+[gui]
+
+theme/custom_font="uid://b26i5rrvivsrq"
+
 [input]
 
 move_left={
