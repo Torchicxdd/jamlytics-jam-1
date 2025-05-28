@@ -28,6 +28,7 @@ project/assembly_name="jamlytics-jam-1"
 
 Hookable=""
 wall=""
+Obstacle=""
 
 [input]
 
@@ -84,6 +85,7 @@ charge={
 2d_physics/layer_3="Hookable"
 2d_physics/layer_4="Obstacles"
 2d_physics/layer_5="Interactable"
+2d_physics/layer_6="Player_Obstacle_Hitbox"
 
 [physics]
 
