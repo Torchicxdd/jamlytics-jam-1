@@ -45,8 +45,8 @@ var swing_length: float
 var angular_velocity: float = 0.0
 var prev_angular_velocity: float = 0
 var swing_direction_initialized: bool = false
+@export var detach_vertical_swing_boost: float = -1250
 @export var swing_energy_loss: float = 0.99
-@export var detach_swing_boost: Vector2 = Vector2(450, 0)
 var used_socket: Array[Node] = []
 
 # Coyote timer
@@ -139,8 +139,7 @@ func horizontal_movement_handler():
 	if horizontal:
 		velocity.x = horizontal * speed
 		if is_charge_dashing:
-			velocity.x = horizontal * speed * charge_dash_power
-			
+			velocity.x = horizontal * speed * charge_dash_power 
 	else:           
 		velocity.x = move_toward(velocity.x, 0, speed)
 
@@ -206,7 +205,6 @@ func swinging_process_handler(delta):
 	
 	# Apply new calculated velocity
 	angular_velocity += applied_angular_velocity
-	angular_velocity *= swing_energy_loss
 	 
 	swing_angle += angular_velocity * delta
 	velocity = Vector2(cos(swing_angle), -sin(swing_angle)) * swing_length * angular_velocity
@@ -221,6 +219,7 @@ func swinging_process_handler(delta):
 	if sign(prev_angular_velocity) != sign(angular_velocity) and swing_direction_initialized == true:
 		is_swinging = false
 		swing_direction_initialized = false
+		velocity.y += detach_vertical_swing_boost
 
 func handle_animations():
 	if velocity.x > 0:
