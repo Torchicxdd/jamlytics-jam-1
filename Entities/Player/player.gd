@@ -54,7 +54,7 @@ var used_socket: Array[Node] = []
 
 func _ready() -> void:
 	# Initialize health bar
-	var health_bar = $Camera2D/HealthBar
+	var health_bar = $Camera2D/HBoxContainer/VBoxContainer/HealthBar
 	for i in range(health):
 		health_list.append(health_bar.get_node("Health" + str(i + 1)))
 	
@@ -184,7 +184,7 @@ func handle_charge_inputs(delta):
 		charge_jump_power = lerp(900.0, max_charge_jump_power, current_charge_time / max_charge_time)
 		charge_dash_power = lerp(2.0, max_charge_dash_power, current_charge_time / max_charge_time)
 	
-	$Camera2D/ChargeBar.value = current_charge_time / max_charge_time
+	$Camera2D/HBoxContainer/VBoxContainer/ChargeBar.value = current_charge_time / max_charge_time
 	
 func swinging_process_handler(delta):
 	var swing_relative_character_position = global_position - global_socket_position
@@ -297,4 +297,4 @@ func reset_values():
 	jump_buffer = false
 	used_socket.clear()
 	update_health_bar()
-	$Camera2D/ChargeBar.value = 0.0
+	$Camera2D/HBoxContainer/VBoxContainer/ChargeBar.value = 0.0
