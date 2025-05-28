@@ -44,7 +44,3 @@ func _physics_process(delta):
 				if collider.is_in_group("wall"):  # safer than using name
 					direction *= -1
 					update_raycast_direction()
-
-func player_hit(body):
-	if body.name == "Player":
-		body.respawn()

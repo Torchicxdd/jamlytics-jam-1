@@ -10,7 +10,7 @@ size = Vector2(812.171, 366.552)
 [node name="Lava" type="Area2D"]
 scale = Vector2(0.21546, 0.135269)
 collision_layer = 8
-collision_mask = 2
+collision_mask = 32
 script = ExtResource("1_ly7dx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

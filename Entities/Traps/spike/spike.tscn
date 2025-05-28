@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://crv2hfmi15sd7" path="res://Entities/Traps/spike/spike.gd" id="1_bxdqp"]
 [ext_resource type="Texture2D" uid="uid://bwq0qp2djskup" path="res://Entities/Traps/spike/spike.png" id="2_amryr"]
 
-[node name="Spike" type="Area2D"]
+[node name="Spike" type="Area2D" groups=["Obstacle"]]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("1_bxdqp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -18,5 +18,4 @@ scale = Vector2(2.87603, 2.01799)
 polygon = PackedVector2Array(-0.695403, -7.43315, -10.0833, 9.91087, 8.69254, 9.91087)
 
 [node name="WallRay" type="RayCast2D" parent="."]
-
-[connection signal="body_entered" from="." to="." method="player_hit"]
+collision_mask = 9

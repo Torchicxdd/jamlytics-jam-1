@@ -59,18 +59,20 @@ func _physics_process(delta: float) -> void:
 			$RayCast2D.force_raycast_update()
 			if $RayCast2D.is_colliding():
 				var collider = $RayCast2D.get_collider()
-				if collider.is_in_group("Hookable") and collider is StaticBody2D:
-					global_socket_position = collider.global_position
-					is_swinging = true
-					is_charge_dashing = false
-					is_charge_jumping = false
-					var swing_relative_character_position = global_position - global_socket_position
-					swing_angle = atan2(swing_relative_character_position.x, swing_relative_character_position.y)
-					swing_length = global_position.distance_to(global_socket_position)
-					# If the socket has not already been used, add it to the used sockets and heal the player
-					if not collider in used_socket and health < max_health:
-						used_socket.append(collider)
-						heal(1)
+				if collider.is_in_group("Hookable") and collider is Socket:
+					var socket = collider as Socket
+					if socket.is_hookable:
+						global_socket_position = collider.global_position
+						is_swinging = true
+						is_charge_dashing = false
+						is_charge_jumping = false
+						var swing_relative_character_position = global_position - global_socket_position
+						swing_angle = atan2(swing_relative_character_position.x, swing_relative_character_position.y)
+						swing_length = global_position.distance_to(global_socket_position)
+						# If the socket has not already been used, add it to the used sockets and heal the player
+						if not collider in used_socket and health < max_health:
+							used_socket.append(collider)
+							heal(1)
 				
 	elif Input.is_action_just_released("left_click"):
 		is_swinging = false
