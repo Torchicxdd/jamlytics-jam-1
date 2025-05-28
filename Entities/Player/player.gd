@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var max_charge_time: float = 1.0
 @export var swing_gravitational_multiplier: float = 2
 @export var jump_buffer_time: float = 0.1
+@export var coyote_time: float = 0.1
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -31,6 +32,7 @@ var is_on_platform = false
 var platform_speed = null
 var checkpoint = null
 var jump_buffer = false
+var jump_available: bool = true
 
 # Charging constants
 var current_charge_time = 0.0
@@ -46,6 +48,9 @@ var swing_direction_initialized: bool = false
 @export var swing_energy_loss: float = 0.99
 @export var detach_swing_boost: Vector2 = Vector2(450, 0)
 var used_socket: Array[Node] = []
+
+# Coyote timer
+@onready var coyote_timer : Timer = $CoyoteTimer
 
 func _ready() -> void:
 	# Initialize health bar
@@ -94,6 +99,12 @@ func _physics_process(delta: float) -> void:
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
+		# start coyote time
+		if jump_available:
+			if coyote_timer.is_stopped():
+				coyote_timer.start(coyote_time)
+			#get_tree().create_timer(coyote_time).timeout.connect(_on_coyote_timer_timeout)
+
 	if is_on_platform:
 		global_position += platform_speed
 	
@@ -103,6 +114,8 @@ func _physics_process(delta: float) -> void:
 func character_process_handler(delta):
 	# Falling / jumping boolean setters
 	if is_on_floor():
+		jump_available = true
+		coyote_timer.stop()
 		is_jumping = false
 		is_charge_jumping = false
 		is_charge_dashing = false
@@ -132,7 +145,7 @@ func horizontal_movement_handler():
 func vertical_movement_handler(delta):
 	# First started jumping
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor():
+		if jump_available:
 			jump()
 		else:
 			# Jump buffer logic
@@ -230,6 +243,7 @@ func jump() -> void:
 	is_charge_jumping = false
 	is_charge_dashing = false
 	is_swinging = false
+	jump_available = false
 	velocity.y = -(jump_power)
 
 func take_damage(damage: int) -> void:
@@ -268,6 +282,9 @@ func _on_health_loss_timer_timeout():
 func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffer = false
 
+func _on_coyote_timer_timeout() -> void:
+	jump_available = false
+
 func reset_values():
 	health = 6
 	current_charge_time = 0.0
@@ -277,6 +294,7 @@ func reset_values():
 	is_charge_jumping = false
 	is_charge_dashing = false
 	swing_direction_initialized = false
+	jump_buffer = false
 	used_socket.clear()
 	update_health_bar()
 	$Camera2D/ChargeBar.value = 0.0
