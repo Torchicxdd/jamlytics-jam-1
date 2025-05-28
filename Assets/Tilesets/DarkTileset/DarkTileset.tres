@@ -1,51 +1,55 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://kta41g8k8m8w"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://kta41g8k8m8w"]
 
+[ext_resource type="PackedScene" uid="uid://n88x4bl2mo2g" path="res://Entities/Platform_Tiles/checkpoint/checkpoint.tscn" id="1_2yud6"]
 [ext_resource type="Texture2D" uid="uid://7olpfoetkmb" path="res://Assets/Tilesets/DarkTileset/simpletileset.png" id="1_mw30y"]
 [ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Entities/Traps/spike/spike.tscn" id="1_olu1p"]
+[ext_resource type="PackedScene" uid="uid://7j43eh2ruib0" path="res://Entities/Socket/Socket.tscn" id="3_3w0ve"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_2yud6"]
+scenes/1/scene = ExtResource("1_2yud6")
 scenes/2/scene = ExtResource("1_olu1p")
+scenes/3/scene = ExtResource("3_3w0ve")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h6j1k"]
 texture = ExtResource("1_mw30y")
 texture_region_size = Vector2i(64, 64)
 1:0/0 = 0
 1:0/0/z_index = -1
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -24, -32, -29.8667, 32, -29.8667, 32, -26.6667, 32, 6.4, -32, 6.4)
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 6.4, -32, -29.8667, 32, -29.8667, 32, 6.4)
 2:0/0 = 0
 2:0/0/z_index = -1
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 6.4, -32, -29.8667, 29.8667, -29.8667, 29.8667, 32, -6.4, 32, -6.4, 6.4)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, 32, 32, -29.8667, -32, -29.8667, -32, 6.4, -6.4, 6.4, -6.4, 32)
 4:0/0 = 0
 4:0/0/z_index = -1
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, -6.4, -6.4, -6.4, -6.4, 32, 32, 32)
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, 32, -6.4, 32, -6.4, -6.4, 32, -6.4)
 5:0/0 = 0
 5:0/0/z_index = -1
-5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -6.4, 6.4, -6.4, 6.4, 32, -32, 32)
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, 6.4, 32, 6.4, -6.4, -32, -6.4)
 0:1/0 = 0
 0:1/0/z_index = -1
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, 32, -29.8667, 32, -29.8667, -32, -26.6667, -32, 6.4, -32, 6.4, 32)
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(6.4, 32, -32, 32, -32, -32, 6.4, -32)
 1:1/0 = 0
 1:1/0/z_index = -2
 2:1/0 = 0
 2:1/0/z_index = -1
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(24, 32, 29.8667, 32, 29.8667, -32, 26.6667, -32, -6.4, -32, -6.4, 32)
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.4, 32, 32, 32, 32, -32, -6.4, -32)
 4:1/0 = 0
 4:1/0/z_index = -1
-4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, 6.4, -6.4, 6.4, -6.4, -32, 32, -32)
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, -32, -6.4, -32, -6.4, 6.4, 32, 6.4)
 5:1/0 = 0
 5:1/0/z_index = -1
-5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 6.4, 6.4, 6.4, 6.4, -32, -32, -32)
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 6.4, -32, 6.4, 6.4, -32, 6.4)
 0:2/0 = 0
 0:2/0/z_index = -1
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, -6.4, 32, 29.8667, -29.8667, 29.8667, -29.8667, -32, 6.4, -32, 6.4, -6.4)
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, -32, 29.8667, 32, 29.8667, 32, -6.4, 6.4, -6.4, 6.4, -32)
 1:2/0 = 0
 1:2/0/z_index = -1
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 24, -32, 29.8667, 32, 29.8667, 32, 26.6667, 32, -6.4, -32, -6.4)
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -6.4, -32, 29.8667, 32, 29.8667, 32, -6.4)
 2:2/0 = 0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -6.4, -32, 29.8667, 29.8667, 29.8667, 29.8667, -32, -6.4, -32, -6.4, -6.4)
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, -32, 32, 29.8667, -32, 29.8667, -32, -6.4, -6.4, -6.4, -6.4, -32)
 0:0/0 = 0
 0:0/0/z_index = -1
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, 6.4, 32, -29.8667, -29.8667, -29.8667, -29.8667, 32, 6.4, 32, 6.4, 6.4)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, -32, -29.8667, 32, -29.8667, 32, 6.4, 6.4, 6.4, 6.4, 32)
 2:4/0 = 0
 2:4/0/z_index = -1
 2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(29.8667, -29.8667, -32, -29.8667, -32, 6.4, 29.8667, 6.4)
