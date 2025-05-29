@@ -29,3 +29,6 @@ position = Vector2(960, -5376)
 
 [node name="Level5" type="Marker2D" parent="LevelMarkers"]
 position = Vector2(960, -5376)
+
+[node name="Level6" type="Marker2D" parent="LevelMarkers"]
+position = Vector2(896, -5376)
