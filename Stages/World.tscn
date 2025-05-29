@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://qsfe3n87mvpm" path="res://Stages/Level2/Level2.tscn" id="4_wi64c"]
 [ext_resource type="PackedScene" uid="uid://dqwhgu6jmdpva" path="res://Stages/Level4/Level4.tscn" id="5_j7hdr"]
 [ext_resource type="PackedScene" uid="uid://byeixjvc7ibx4" path="res://Stages/Level3/Level3.tscn" id="6_j7hdr"]
-[ext_resource type="PackedScene" uid="uid://b2nwi5nppkq1" path="res://Stages/Level5/Level5.tscn" id="6_q0h56"]
+[ext_resource type="PackedScene" uid="uid://bws6jiqyfs3cn" path="res://Stages/Level5/Level5.tscn" id="6_q0h56"]
 
 [node name="World" type="Node2D"]
 
