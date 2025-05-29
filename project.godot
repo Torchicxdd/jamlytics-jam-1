@@ -12,13 +12,13 @@ config_version=5
 
 config/name="jamlytics-jam-1"
 run/main_scene="uid://bpiyhiq4ts7te"
-config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [dotnet]
 
@@ -95,3 +95,8 @@ charge={
 
 2d/run_on_separate_thread=true
 2d/default_gravity=5000.0
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
