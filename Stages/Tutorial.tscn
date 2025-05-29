@@ -14,7 +14,3 @@ position = Vector2(5440, -448)
 
 [node name="Socket2" parent="." instance=ExtResource("3_fteiw")]
 position = Vector2(13184, -1792)
-
-[connection signal="body_entered" from="Terrain/Checkpoint" to="Terrain/Checkpoint" method="_on_body_entered"]
-[connection signal="body_entered" from="Terrain/@Area2D@44578" to="Terrain/@Area2D@44578" method="_on_body_entered"]
-[connection signal="body_entered" from="Terrain/@Area2D@45274" to="Terrain/@Area2D@45274" method="_on_body_entered"]
