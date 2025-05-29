@@ -9,4 +9,23 @@ script = ExtResource("1_8u7wh")
 [node name="Player" parent="." instance=ExtResource("1_8ohrn")]
 position = Vector2(-15560, 1280)
 
-[node name="Levels" type="Node2D" parent="."]
+[node name="LoadedLevels" type="Node2D" parent="."]
+
+[node name="LevelMarkers" type="Node2D" parent="."]
+
+[node name="Level0" type="Marker2D" parent="LevelMarkers"]
+position = Vector2(-15120, 1280)
+
+[node name="Level1" type="Marker2D" parent="LevelMarkers"]
+
+[node name="Level2" type="Marker2D" parent="LevelMarkers"]
+position = Vector2(4080, -1664)
+
+[node name="Level3" type="Marker2D" parent="LevelMarkers"]
+position = Vector2(1216, -3648)
+
+[node name="Level4" type="Marker2D" parent="LevelMarkers"]
+position = Vector2(960, -5376)
+
+[node name="Level5" type="Marker2D" parent="LevelMarkers"]
+position = Vector2(960, -5376)

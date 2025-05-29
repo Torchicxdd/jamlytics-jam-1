@@ -1,11 +1,12 @@
 class_name World extends Node2D
 
-@onready var levels: Node2D = $Levels
+@onready var levels: Node2D = $LevelMarkers
+@onready var loaded_levels: Node2D = $LoadedLevels
 
 func _ready() -> void:
 	Global.world = self
-	load_level(0, Vector2(-15120, 1280))
-	load_level(1, Vector2(0, 0))
+	load_level(0)
+	load_level(1)
 
 func unload_level(level_num: int):
 	var node_name := "Level%s" % level_num
@@ -19,7 +20,7 @@ func unload_level(level_num: int):
 			Global.loaded_levels.erase(repeat_instance)
 			repeat_instance.queue_free()
 
-func load_level(level_num: int, level_position: Vector2):
+func load_level(level_num: int):
 	var node_name := "Level%s" % level_num
 	var repeat_instance = false
 	for level in Global.loaded_levels:
@@ -32,6 +33,9 @@ func load_level(level_num: int, level_position: Vector2):
 		var level_resource := load(level_path)
 		if (level_resource):
 			var level_instance = level_resource.instantiate()
-			level_instance.global_position = level_position
+			level_instance.name = node_name
+			level_instance.global_position = levels.find_child(node_name).global_position
 			Global.loaded_levels.append(level_instance)
-			levels.add_child(level_instance)
+			for level in Global.loaded_levels:
+				print(level.name)
+			loaded_levels.call_deferred("add_child", level_instance)
