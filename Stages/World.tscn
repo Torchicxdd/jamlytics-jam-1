@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpiyhiq4ts7te"]
+[gd_scene load_steps=7 format=3 uid="uid://bpiyhiq4ts7te"]
 
 [ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="1_8ohrn"]
 [ext_resource type="PackedScene" uid="uid://dp5k3uq3x448f" path="res://Stages/Level1/Level1.tscn" id="1_qqryp"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://qsfe3n87mvpm" path="res://Stages/Level2/Level2.tscn" id="4_wi64c"]
 [ext_resource type="PackedScene" uid="uid://dqwhgu6jmdpva" path="res://Stages/Level4/Level4.tscn" id="5_j7hdr"]
 [ext_resource type="PackedScene" uid="uid://byeixjvc7ibx4" path="res://Stages/Level3/Level3.tscn" id="6_j7hdr"]
-[ext_resource type="PackedScene" uid="uid://qk7tm4gm8vwn" path="res://Stages/Level5/Level5.tscn" id="7_q0h56"]
 
 [node name="World" type="Node2D"]
 
@@ -26,6 +25,3 @@ position = Vector2(960, -5376)
 
 [node name="Player" parent="." instance=ExtResource("1_8ohrn")]
 position = Vector2(-15560, 1280)
-
-[node name="Level5" parent="." instance=ExtResource("7_q0h56")]
-position = Vector2(4800, -5504)
