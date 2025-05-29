@@ -22,5 +22,4 @@ script = ExtResource("2_aj8jr")
 position = Vector2(2630, -1403)
 shape = SubResource("RectangleShape2D_wvjov")
 
-[connection signal="body_entered" from="TileMapLayer/Checkpoint" to="TileMapLayer/Checkpoint" method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

@@ -1,0 +1,37 @@
+class_name World extends Node2D
+
+@onready var levels: Node2D = $Levels
+
+func _ready() -> void:
+	Global.world = self
+	load_level(0, Vector2(-15120, 1280))
+	load_level(1, Vector2(0, 0))
+
+func unload_level(level_num: int):
+	var node_name := "Level%s" % level_num
+	var repeat_instance = null
+	for level in Global.loaded_levels:
+		if level.name == node_name:
+			repeat_instance = level
+			break
+	if repeat_instance:
+		if (is_instance_valid(repeat_instance)):
+			Global.loaded_levels.erase(repeat_instance)
+			repeat_instance.queue_free()
+
+func load_level(level_num: int, level_position: Vector2):
+	var node_name := "Level%s" % level_num
+	var repeat_instance = false
+	for level in Global.loaded_levels:
+		if level.name == node_name:
+			repeat_instance = true
+			break
+	if not repeat_instance:
+		var level_path_format := "res://Stages/Level%s/Level%s.tscn"
+		var level_path = level_path_format % [level_num, level_num]
+		var level_resource := load(level_path)
+		if (level_resource):
+			var level_instance = level_resource.instantiate()
+			level_instance.global_position = level_position
+			Global.loaded_levels.append(level_instance)
+			levels.add_child(level_instance)

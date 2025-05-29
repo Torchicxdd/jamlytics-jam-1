@@ -1,31 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpiyhiq4ts7te"]
+[gd_scene load_steps=3 format=3 uid="uid://bpiyhiq4ts7te"]
 
 [ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="1_8ohrn"]
-[ext_resource type="PackedScene" uid="uid://dp5k3uq3x448f" path="res://Stages/Level1/Level1.tscn" id="1_qqryp"]
-[ext_resource type="PackedScene" uid="uid://fe8ldd8wnv84" path="res://Stages/Tutorial.tscn" id="2_du74e"]
-[ext_resource type="PackedScene" uid="uid://qsfe3n87mvpm" path="res://Stages/Level2/Level2.tscn" id="4_wi64c"]
-[ext_resource type="PackedScene" uid="uid://dqwhgu6jmdpva" path="res://Stages/Level4/Level4.tscn" id="5_j7hdr"]
-[ext_resource type="PackedScene" uid="uid://byeixjvc7ibx4" path="res://Stages/Level3/Level3.tscn" id="6_j7hdr"]
-[ext_resource type="PackedScene" uid="uid://bws6jiqyfs3cn" path="res://Stages/Level5/Level5.tscn" id="6_q0h56"]
+[ext_resource type="Script" uid="uid://cjiypixekhxu3" path="res://Stages/world.gd" id="1_8u7wh"]
 
 [node name="World" type="Node2D"]
-
-[node name="Tutorial" parent="." instance=ExtResource("2_du74e")]
-position = Vector2(-15120, 1280)
-
-[node name="Level1" parent="." instance=ExtResource("1_qqryp")]
-
-[node name="Level2" parent="." instance=ExtResource("4_wi64c")]
-position = Vector2(4080, -1664)
-
-[node name="Level3" parent="." instance=ExtResource("6_j7hdr")]
-position = Vector2(1216, -3648)
-
-[node name="Level4" parent="." instance=ExtResource("5_j7hdr")]
-position = Vector2(960, -5376)
-
-[node name="Level5" parent="." instance=ExtResource("6_q0h56")]
-position = Vector2(960, -5376)
+script = ExtResource("1_8u7wh")
 
 [node name="Player" parent="." instance=ExtResource("1_8ohrn")]
 position = Vector2(-15560, 1280)
+
+[node name="Levels" type="Node2D" parent="."]
