@@ -182,7 +182,7 @@ func handle_charge_inputs(delta):
 		charge_jump_power = lerp(900.0, max_charge_jump_power, current_charge_time / max_charge_time)
 		charge_dash_power = lerp(2.0, max_charge_dash_power, current_charge_time / max_charge_time)
 	
-	$Camera2D/HBoxContainer/VBoxContainer/ChargeBar.value = current_charge_time / max_charge_time
+	Global.hud.update_charge_bar(current_charge_time, max_charge_time)
 	
 func swinging_process_handler(delta):
 	var swing_relative_character_position = global_position - global_socket_position
@@ -260,8 +260,7 @@ func heal(damage: int) -> void:
 	update_health_bar()
 
 func update_health_bar() -> void:
-	for i in range($Camera2D/HBoxContainer/VBoxContainer/HealthBar.get_child_count()):
-		$Camera2D/HBoxContainer/VBoxContainer/HealthBar.get_child(i).visible = i < health
+	Global.hud.update_health_bars(health)
 
 func respawn():
 	if checkpoint:
@@ -284,11 +283,10 @@ func _on_coyote_timer_timeout() -> void:
 
 func add_health_bars(amount: int):
 	for i in amount:
-		$Camera2D/HBoxContainer/VBoxContainer/HealthBar.add_health()
+		Global.hud.add_health()
 
 func clear_health_bars():
-	for i in $Camera2D/HBoxContainer/VBoxContainer/HealthBar.get_children():
-		i.queue_free()
+	Global.hud.clear_health_bars()
 
 func reset_health():
 	health = health_constant
@@ -308,4 +306,4 @@ func reset_values():
 	jump_buffer = false
 	used_socket.clear()
 	update_health_bar()
-	$Camera2D/HBoxContainer/VBoxContainer/ChargeBar.value = 0.0
+	Global.hud.reset_charge_bar()
