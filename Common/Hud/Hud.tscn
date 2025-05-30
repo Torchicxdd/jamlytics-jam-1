@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5bcalqvp5n14"]
+
+[ext_resource type="Script" uid="uid://b7jlvfx7mkwkc" path="res://Common/Hud/hud.gd" id="1_klc6k"]
+[ext_resource type="Texture2D" uid="uid://dblerr3830skn" path="res://Assets/Hud/HudIcon.png" id="2_c51pd"]
+[ext_resource type="Texture2D" uid="uid://dyyba5s66uk25" path="res://Assets/Hud/EnergyIcon.png" id="3_phj0m"]
+[ext_resource type="Script" uid="uid://dfpyff4746gah" path="res://Entities/Player/health_bar.gd" id="4_6utl4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7hdr"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0h56"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[node name="HBoxContainer" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 50.0
+offset_bottom = 144.0
+grow_horizontal = 2
+scale = Vector2(0.75, 0.75)
+theme_override_constants/separation = 18
+script = ExtResource("1_klc6k")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_c51pd")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_phj0m")
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="HealthBar" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_6utl4")
+
+[node name="ChargeBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(220, 8)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_j7hdr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_q0h56")
+max_value = 1.0
+show_percentage = false
