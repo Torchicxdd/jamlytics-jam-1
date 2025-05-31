@@ -13,3 +13,4 @@ func _process(delta: float) -> void:
 		var viewport_size_zoom = viewport_size / zoom
 		var calculated_scale = viewport_size_zoom / texture_size
 		scale = calculated_scale
+		offset.y = 272
