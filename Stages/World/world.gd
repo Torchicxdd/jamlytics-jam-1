@@ -8,10 +8,6 @@ func _ready() -> void:
 	load_level(0)
 	load_level(1)
 
-func _process(delta: float) -> void:
-	$ParallaxBackground/Parallax2D.scroll_offset = $Player/Camera2D.get_screen_center_position()
-	$ParallaxBackground/Parallax2D.scale = Vector2(1 / $Player/Camera2D.zoom.x, 1 / $Player/Camera2D.zoom.y)
-
 func unload_level(level_num: int):
 	var node_name := "Level%s" % level_num
 	var repeat_instance = null

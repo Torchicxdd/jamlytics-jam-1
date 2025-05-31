@@ -9,5 +9,5 @@ tile_map_data = PackedByteArray("AAD//wEAAQABAAAAAAAAAAEAAQABAAAAAAABAAEAAQABAAA
 tile_set = ExtResource("1_dqwyp")
 
 [connection signal="body_entered" from="Terrain/Checkpoint" to="Terrain/Checkpoint" method="_on_body_entered"]
-[connection signal="body_entered" from="Terrain/@Area2D@184542" to="Terrain/@Area2D@184542" method="_on_body_entered"]
-[connection signal="body_entered" from="Terrain/@Area2D@184543" to="Terrain/@Area2D@184543" method="_on_body_entered"]
+[connection signal="body_entered" from="Terrain/@Area2D@244415" to="Terrain/@Area2D@244415" method="_on_body_entered"]
+[connection signal="body_entered" from="Terrain/@Area2D@244416" to="Terrain/@Area2D@244416" method="_on_body_entered"]
