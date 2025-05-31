@@ -12,10 +12,13 @@ z_index = -1
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground"]
 z_index = -1
+scroll_scale = Vector2(0.1, 0)
+repeat_size = Vector2(3360, 0)
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D"]
 z_index = -1
-scale = Vector2(1.75, 1.75)
+scale = Vector2(2, 2)
 texture = ExtResource("3_8ohrn")
 
 [node name="LoadedLevels" type="Node2D" parent="."]
@@ -23,27 +26,26 @@ texture = ExtResource("3_8ohrn")
 [node name="LevelMarkers" type="Node2D" parent="."]
 
 [node name="Level0" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(-15120, 1280)
 
 [node name="Level1" type="Marker2D" parent="LevelMarkers"]
+position = Vector2(16128, -1280)
 
 [node name="Level2" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(4080, -1664)
+position = Vector2(20208, -2944)
 
 [node name="Level3" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(1216, -3648)
+position = Vector2(17344, -4928)
 
 [node name="Level4" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(960, -5376)
+position = Vector2(17088, -6656)
 
 [node name="Level5" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(960, -5376)
+position = Vector2(19712, -8000)
 
 [node name="Level6" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(896, -5376)
+position = Vector2(25152, -8448)
 
 [node name="Player" parent="." instance=ExtResource("1_8ohrn")]
-position = Vector2(-15560, 1280)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.5, 0.5)
