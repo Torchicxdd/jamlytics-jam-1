@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://8xcibs6yx7bj"]
+[gd_scene load_steps=6 format=3 uid="uid://8xcibs6yx7bj"]
 
 [ext_resource type="Texture2D" uid="uid://cxcx20ycol7xj" path="res://themes/dialog_bg.png" id="1_c3ow0"]
 [ext_resource type="Script" uid="uid://1xavs85imxx0" path="res://Entities/Dialog/dialog_player.gd" id="1_kqpob"]
 [ext_resource type="Texture2D" uid="uid://bttpya60yqrgm" path="res://themes/dialog_avatar.png" id="2_v2m1e"]
+[ext_resource type="Texture2D" uid="uid://b7nvyre85oon2" path="res://Assets/skipBg.png" id="4_pxxxo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pxxxo"]
+texture = ExtResource("4_pxxxo")
 
 [node name="DialogPlayer" type="CanvasLayer"]
 process_mode = 3
@@ -10,31 +14,65 @@ script = ExtResource("1_kqpob")
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextBackground" type="TextureRect" parent="Background"]
-layout_mode = 0
-offset_left = 210.0
-offset_top = 475.0
-offset_right = 1070.0
-offset_bottom = 633.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.843
+anchor_right = 0.5
+anchor_bottom = 0.854
+offset_left = -430.0
+offset_top = -158.0
+offset_right = 430.0
+grow_horizontal = 2
+grow_vertical = 0
 texture = ExtResource("1_c3ow0")
+
+[node name="TextLabel" type="RichTextLabel" parent="Background/TextBackground"]
+layout_mode = 2
+offset_left = 67.0
+offset_top = 45.0
+offset_right = 638.0
+offset_bottom = 114.0
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/TextBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.509
+anchor_top = 0.801
+anchor_right = 0.509
+anchor_bottom = 1.14
+offset_left = -94.74
+offset_top = 0.0308838
+offset_right = 94.02
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="skipLable" type="RichTextLabel" parent="Background/TextBackground/VBoxContainer"]
+custom_minimum_size = Vector2(175, 48)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_pxxxo")
+bbcode_enabled = true
+text = "{interact} to skip"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BackgroundAvatar" type="TextureRect" parent="Background"]
 layout_mode = 0
-offset_left = 832.0
+offset_left = 853.0
 offset_top = 400.0
-offset_right = 985.0
+offset_right = 1006.0
 offset_bottom = 553.0
 texture = ExtResource("2_v2m1e")
-
-[node name="TextLabel" type="Label" parent="."]
-anchors_preset = -1
-offset_left = 264.0
-offset_top = 520.0
-offset_right = 848.0
-offset_bottom = 576.0
-vertical_alignment = 1
-autowrap_mode = 3
