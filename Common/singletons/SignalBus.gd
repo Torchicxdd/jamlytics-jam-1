@@ -11,6 +11,8 @@ signal set_checkpoint(location: Vector2)
 signal heal_player(amount: int)
 signal is_swinging()
 signal has_stopped_swinging()
+signal is_charging(current_charge_time: float, max_charge_time: float)
+signal take_damage(amount: int)
 
 # Socket
 signal swinging()

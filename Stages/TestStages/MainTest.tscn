@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://brrsxga3eerdx"]
+
+[ext_resource type="PackedScene" uid="uid://c5bcalqvp5n14" path="res://Common/Hud/Hud.tscn" id="1_hwbr8"]
+
+[node name="MainTest" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" parent="CanvasLayer" instance=ExtResource("1_hwbr8")]

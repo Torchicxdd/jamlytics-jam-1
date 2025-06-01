@@ -4,4 +4,4 @@ extends Area2D
 
 func player_hit(body):
 	if body.name == "Player":
-		body.respawn()
+		SignalBus.emit_signal("death")

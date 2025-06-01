@@ -53,10 +53,11 @@ var swing_direction_initialized: bool = false
 
 func _ready() -> void:
 	# Initialize health bar
-	add_health_bars(health)
+	SignalBus.emit_signal("heal_player", health)
 	SignalBus.connect("death", Callable(self, "_on_death"))
 	SignalBus.connect("set_checkpoint", Callable(self, "_on_set_checkpoint"))
 	SignalBus.connect("heal_player", Callable(self, "heal"))
+	SignalBus.connect("take_damage", Callable(self, "take_damage"))
 	
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -159,7 +160,7 @@ func handle_charge_inputs(delta):
 		is_charge_dashing = false
 		is_swinging = false
 		velocity.y = -(charge_jump_power)
-		take_damage(1)
+		SignalBus.emit_signal("take_damage", 1)
 		
 	if Input.is_action_just_released("charge") and not is_on_floor() and not is_charge_dashing:
 		is_jumping = false
@@ -167,7 +168,7 @@ func handle_charge_inputs(delta):
 		is_charge_dashing = true
 		is_swinging = false
 		velocity.y = -(charge_jump_power/2)
-		take_damage(1)
+		SignalBus.emit_signal("take_damage", 1)
 		
 	# Handle charging jumps
 	if Input.is_action_pressed("charge"):
@@ -183,7 +184,7 @@ func handle_charge_inputs(delta):
 		charge_jump_power = lerp(900.0, max_charge_jump_power, current_charge_time / max_charge_time)
 		charge_dash_power = lerp(2.0, max_charge_dash_power, current_charge_time / max_charge_time)
 	
-	Global.hud.update_charge_bar(current_charge_time, max_charge_time)
+	SignalBus.emit_signal("is_charging", current_charge_time, max_charge_time)
 	
 func swinging_process_handler(delta):
 	var swing_relative_character_position = global_position - global_socket_position
@@ -248,9 +249,8 @@ func jump() -> void:
 
 func take_damage(damage: int) -> void:
 	health -= damage
-	update_health_bar()
 	if health <= 0:
-		respawn()
+		SignalBus.emit_signal("death")
 		
 
 func heal(damage: int) -> void:
@@ -258,19 +258,10 @@ func heal(damage: int) -> void:
 	if health > health_constant:
 		health = health_constant
 
-	update_health_bar()
-
-func update_health_bar() -> void:
-	Global.hud.update_health_bars(health)
-
-func respawn():
-	global_position = checkpoint
-	reset_values()
-
 # called by whatever timer that is in the stage that the player is in
 # make sure to set up the signal per stage to whatver time u want
 func _on_health_loss_timer_timeout():
-	take_damage(1)
+	SignalBus.emit_signal("take_damage", 1)
 
 func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffer = false
@@ -278,27 +269,15 @@ func _on_jump_buffer_timer_timeout() -> void:
 func _on_coyote_timer_timeout() -> void:
 	jump_available = false
 
-func add_health_bars(amount: int):
-	for i in amount:
-		Global.hud.add_health()
-
-func clear_health_bars():
-	Global.hud.clear_health_bars()
-
-func reset_health():
-	health = health_constant
-	clear_health_bars()
-	add_health_bars(health_constant)
-
 func _on_death():
-	respawn()
+	global_position = checkpoint
+	reset_values()
 
 func _on_set_checkpoint(position: Vector2):
 	checkpoint = position
 
 func reset_values():
 	health = health_constant
-	add_health_bars(health)
 	current_charge_time = 0.0
 	is_swinging = false
 	is_jumping = false
@@ -307,5 +286,4 @@ func reset_values():
 	is_charge_dashing = false
 	swing_direction_initialized = false
 	jump_buffer = false
-	update_health_bar()
-	Global.hud.reset_charge_bar()
+	SignalBus.emit_signal("heal_player", health)
