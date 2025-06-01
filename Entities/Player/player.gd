@@ -58,6 +58,8 @@ func _ready() -> void:
 	SignalBus.connect("set_checkpoint", Callable(self, "_on_set_checkpoint"))
 	SignalBus.connect("heal_player", Callable(self, "heal"))
 	SignalBus.connect("take_damage", Callable(self, "take_damage"))
+	SignalBus.connect("on_platform", Callable(self, "_on_on_platform"))
+	SignalBus.connect("off_platform", Callable(self, "_on_off_platform"))
 	
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -272,6 +274,14 @@ func _on_coyote_timer_timeout() -> void:
 func _on_death():
 	global_position = checkpoint
 	reset_values()
+
+func _on_on_platform(speed: Vector2):
+	is_on_platform = true
+	platform_speed = speed
+	
+func _on_off_platform():
+	is_on_platform = false
+	platform_speed = null
 
 func _on_set_checkpoint(position: Vector2):
 	checkpoint = position

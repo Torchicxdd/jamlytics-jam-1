@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=4 uid="uid://c7pm0ey7p58dq"]
+
+[ext_resource type="TileSet" uid="uid://kta41g8k8m8w" path="res://Assets/Tilesets/DarkTileset/DarkTileset.tres" id="1_msl4f"]
+[ext_resource type="PackedScene" uid="uid://ngefey7r8f8p" path="res://Entities/Platform_Tiles/platform/platform.tscn" id="2_680es"]
+[ext_resource type="PackedScene" uid="uid://b8ha1jy7obelf" path="res://Stages/TestStages/test_camera.tscn" id="3_msl4f"]
+[ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="3_pymnk"]
+
+[node name="Level8" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAABAAYAAQAEAAEAAAACAAYAAQABAAAAAAADAAYAAQABAAAAAAAEAAYAAQABAAAAAAAFAAYAAQABAAAAAAAGAAYAAQABAAAAAAAHAAYAAQABAAAAAAAIAAYAAQABAAAAAAAJAAYAAQABAAAAAAAKAAYAAQABAAAAAAALAAYAAQABAAAAAAAMAAYAAQABAAAAAAANAAYAAQABAAAAAAAOAAYAAQABAAAAAAAPAAYAAQABAAAAAAAQAAYAAQABAAAAAAARAAYAAQABAAAAAAABAAUAAQACAAEAAAACAAUAAAAAAAAAAgADAAUAAAAAAAAAAgAEAAUAAAAAAAAAAgAFAAUAAAAAAAAAAgAGAAUAAAAAAAAAAgAHAAUAAAAAAAAAAgAIAAUAAAAAAAAAAgAJAAUAAAAAAAAAAgAKAAUAAAAAAAAAAgALAAUAAAAAAAAAAgAMAAUAAAAAAAAAAgANAAUAAAAAAAAAAgAOAAUAAAAAAAAAAgAPAAUAAAAAAAAAAgAQAAUAAAAAAAAAAgARAAUAAAAAAAAAAgABAAAAAQACAAAAAAABAAEAAQACAAEAAAABAAIAAQACAAEAAAABAAMAAQACAAEAAAABAAQAAQACAAEAAAAAAPz/AQABAAIAAAABAPz/AQACAAIAAAABAPv/AQACAAEAAAABAPr/AQACAAEAAAABAPn/AQACAAEAAAABAPj/AQACAAEAAAABAPf/AQACAAEAAAABAP//AAAAAAAAAQASAAYAAQAFAAEAAAASAAUAAQAAAAEAAAASAAQAAQAAAAEAAAASAAMAAQAAAAEAAAASAAIAAQAAAAEAAAASAAEAAQAAAAEAAAASAAAAAQAAAAAAAAATAAAAAQABAAAAAAAUAAAAAQABAAAAAAA=")
+tile_set = ExtResource("1_msl4f")
+
+[node name="Player" parent="." instance=ExtResource("3_pymnk")]
+position = Vector2(36, -65)
+
+[node name="Camera2D" parent="." instance=ExtResource("3_msl4f")]
+position = Vector2(1279, -275)
+
+[node name="Platform" parent="." instance=ExtResource("2_680es")]
+position = Vector2(351, 21)
+is_moving = true
+range = 600.0
+
+[connection signal="area_entered" from="TileMapLayer/Spike" to="TileMapLayer/Spike" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73520" to="TileMapLayer/@Area2D@73520" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73521" to="TileMapLayer/@Area2D@73521" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73522" to="TileMapLayer/@Area2D@73522" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73523" to="TileMapLayer/@Area2D@73523" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73524" to="TileMapLayer/@Area2D@73524" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73525" to="TileMapLayer/@Area2D@73525" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73526" to="TileMapLayer/@Area2D@73526" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73527" to="TileMapLayer/@Area2D@73527" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73528" to="TileMapLayer/@Area2D@73528" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73529" to="TileMapLayer/@Area2D@73529" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73530" to="TileMapLayer/@Area2D@73530" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73531" to="TileMapLayer/@Area2D@73531" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73532" to="TileMapLayer/@Area2D@73532" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73533" to="TileMapLayer/@Area2D@73533" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/@Area2D@73534" to="TileMapLayer/@Area2D@73534" method="_on_area_entered"]
+[connection signal="body_entered" from="TileMapLayer/Checkpoint" to="TileMapLayer/Checkpoint" method="_on_body_entered"]

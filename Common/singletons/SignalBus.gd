@@ -13,6 +13,8 @@ signal is_swinging()
 signal has_stopped_swinging()
 signal is_charging(current_charge_time: float, max_charge_time: float)
 signal take_damage(amount: int)
+signal on_platform(speed: Vector2)
+signal off_platform()
 
 # Socket
 signal swinging()

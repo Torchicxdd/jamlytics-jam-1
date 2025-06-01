@@ -39,6 +39,8 @@ func _physics_process(delta):
 				var collider = wall_ray.get_collider()
 				if collider.is_in_group("wall"):  # safer than using name
 					direction *= -1
+					if player_on_platform:
+						player_on_platform.platform_speed *= -1
 					update_raycast_direction()
 			velocity = global_position - previous_position
 		else:
@@ -52,6 +54,8 @@ func _physics_process(delta):
 				var collider = wall_ray.get_collider()
 				if collider.is_in_group("wall"):  # safer than using name
 					direction *= -1
+					if player_on_platform:
+						player_on_platform.platform_speed *= -1
 					update_raycast_direction()
 			velocity = global_position - previous_position
 	previous_position = global_position  
@@ -59,14 +63,13 @@ func _physics_process(delta):
 func _on_Area2D_body_entered(body):
 	if body.name == "Player":
 		player_on_platform = body
-		body.is_on_platform = true
-		body.platform_speed = velocity
+		print(velocity)
+		SignalBus.emit_signal("on_platform", velocity)
 
 func _on_Area2D_body_exited(body):
 	if body.name == "Player":
 		player_on_platform = null
-		body.is_on_platform = false
-		body.platform_speed = null
+		SignalBus.emit_signal("off_platform")
 		
 
 
