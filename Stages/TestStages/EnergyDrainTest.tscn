@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://kta41g8k8m8w" path="res://Assets/Tilesets/DarkTileset/DarkTileset.tres" id="1_22rac"]
 [ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="2_njkhw"]
 [ext_resource type="PackedScene" uid="uid://7j43eh2ruib0" path="res://Entities/Socket/Socket.tscn" id="3_7vwki"]
-[ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Entities/Traps/spike/spike.tscn" id="4_14nr7"]
+[ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Entities/Traps/spike/spike90.tscn" id="4_14nr7"]
 
 [node name="MonoDirectionSwing" type="Node2D"]
 

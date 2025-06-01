@@ -17,6 +17,7 @@ func _on_body_entered(body):
 				#sprite.texture = inactive_texture
 				#active = false
 		else:
-				body.checkpoint = global_position
-				sprite.texture = active_texture
-				active = true
+			SignalBus.emit_signal("set_checkpoint", global_position)
+			#body.checkpoint = global_position
+			sprite.texture = active_texture
+			active = true

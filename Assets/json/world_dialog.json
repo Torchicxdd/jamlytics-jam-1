@@ -1,8 +1,6 @@
 {
 	"walk": [
-		"Tropi walks around the deserted area alone. Press [color=#EE561A]{move_left}[/color] and  [color=#EE561A]{move_right}[/color] to move around."
-	],
-	"jump": [
+		"Tropi walks around the deserted area alone. Press [color=#EE561A]{move_left}[/color] and  [color=#EE561A]{move_right}[/color] to move around.",
 		"Tropi is capable of small jumps. Press [color=#EE561A]{jump}[/color] to jump."
 	],
 	"charge_jump": [
@@ -26,6 +24,5 @@
 	"charging_station": [
 		"There are remnants of the old world's power.",
 		"Tropi can fully recharge by standing next to the charging stations."
-	],
-	
+	]
 }

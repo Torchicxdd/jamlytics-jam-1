@@ -1,14 +1,20 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://kta41g8k8m8w"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://kta41g8k8m8w"]
 
 [ext_resource type="PackedScene" uid="uid://n88x4bl2mo2g" path="res://Entities/Platform_Tiles/checkpoint/checkpoint.tscn" id="1_2yud6"]
 [ext_resource type="Texture2D" uid="uid://7olpfoetkmb" path="res://Assets/Tilesets/DarkTileset/simpletileset.png" id="1_mw30y"]
-[ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Entities/Traps/spike/spike.tscn" id="1_olu1p"]
+[ext_resource type="PackedScene" uid="uid://c6d3slorid4pf" path="res://Entities/Traps/spike/spike90.tscn" id="2_t8ko0"]
 [ext_resource type="PackedScene" uid="uid://7j43eh2ruib0" path="res://Entities/Socket/Socket.tscn" id="3_3w0ve"]
+[ext_resource type="PackedScene" uid="uid://dmqhbecfrmcva" path="res://Entities/Traps/spike/spike0.tscn" id="4_keq1l"]
+[ext_resource type="PackedScene" uid="uid://b2n2vbgsejvng" path="res://Entities/Traps/spike/spike180.tscn" id="5_2kdds"]
+[ext_resource type="PackedScene" uid="uid://dj4ie73o3jpna" path="res://Entities/Traps/spike/spike270.tscn" id="6_hgpb8"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_2yud6"]
 scenes/1/scene = ExtResource("1_2yud6")
-scenes/2/scene = ExtResource("1_olu1p")
+scenes/2/scene = ExtResource("2_t8ko0")
 scenes/3/scene = ExtResource("3_3w0ve")
+scenes/4/scene = ExtResource("4_keq1l")
+scenes/5/scene = ExtResource("5_2kdds")
+scenes/6/scene = ExtResource("6_hgpb8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h6j1k"]
 texture = ExtResource("1_mw30y")

@@ -44,3 +44,6 @@ func _physics_process(delta):
 				if collider.is_in_group("wall"):  # safer than using name
 					direction *= -1
 					update_raycast_direction()
+
+func _on_area_entered(area: Area2D) -> void:
+	SignalBus.emit_signal("death")
