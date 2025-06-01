@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpiyhiq4ts7te"]
+[gd_scene load_steps=7 format=3 uid="uid://bpiyhiq4ts7te"]
 
 [ext_resource type="PackedScene" uid="uid://d11att5mis0e5" path="res://Entities/Player/Player.tscn" id="1_8ohrn"]
 [ext_resource type="Script" uid="uid://cjiypixekhxu3" path="res://Stages/World/world.gd" id="1_8u7wh"]
 [ext_resource type="Script" uid="uid://cu6l3hqhwvr2v" path="res://Stages/World/background_parallax.gd" id="2_5ivi7"]
 [ext_resource type="Script" uid="uid://cotqje5ii8bpf" path="res://Stages/World/background.gd" id="3_3d6ij"]
 [ext_resource type="Texture2D" uid="uid://la6gxboror71" path="res://Assets/Background.png" id="3_8ohrn"]
+[ext_resource type="PackedScene" uid="uid://8xcibs6yx7bj" path="res://Entities/Dialog/DialogPlayer.tscn" id="6_1ofmh"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_8u7wh")
@@ -29,22 +30,22 @@ script = ExtResource("3_3d6ij")
 [node name="Level0" type="Marker2D" parent="LevelMarkers"]
 
 [node name="Level1" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(16128, -1280)
+position = Vector2(13312, -1280)
 
 [node name="Level2" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(20208, -2944)
+position = Vector2(18480, -2944)
 
 [node name="Level3" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(17344, -4928)
+position = Vector2(15616, -4928)
 
 [node name="Level4" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(17088, -6656)
+position = Vector2(15360, -6656)
 
 [node name="Level5" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(19712, -8000)
+position = Vector2(17984, -8000)
 
 [node name="Level6" type="Marker2D" parent="LevelMarkers"]
-position = Vector2(25152, -8448)
+position = Vector2(23424, -8448)
 
 [node name="Player" parent="." instance=ExtResource("1_8ohrn")]
 
@@ -53,3 +54,6 @@ zoom = Vector2(0.5, 0.5)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
+
+[node name="DialogPlayer" parent="." instance=ExtResource("6_1ofmh")]
+scene_text_file = "res://Assets/json/world_dialog.json"

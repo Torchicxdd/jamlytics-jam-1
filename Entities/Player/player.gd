@@ -30,7 +30,7 @@ var is_charge_jumping = false
 var is_charge_dashing = false
 var is_on_platform = false
 var platform_speed = null
-var checkpoint = null
+var checkpoint = Vector2(0, 0)
 var jump_buffer = false
 var jump_available: bool = true
 
@@ -263,11 +263,7 @@ func update_health_bar() -> void:
 	Global.hud.update_health_bars(health)
 
 func respawn():
-	if checkpoint:
-		global_position = checkpoint
-	else:
-		global_position = Vector2(-1216, -702)
-	
+	global_position = checkpoint
 	reset_values()
 
 # called by whatever timer that is in the stage that the player is in

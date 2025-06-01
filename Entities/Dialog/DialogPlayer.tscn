@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://8xcibs6yx7bj"]
+
+[ext_resource type="Texture2D" uid="uid://cxcx20ycol7xj" path="res://themes/dialog_bg.png" id="1_c3ow0"]
+[ext_resource type="Script" uid="uid://1xavs85imxx0" path="res://Entities/Dialog/dialog_player.gd" id="1_kqpob"]
+[ext_resource type="Texture2D" uid="uid://bttpya60yqrgm" path="res://themes/dialog_avatar.png" id="2_v2m1e"]
+
+[node name="DialogPlayer" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_kqpob")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextBackground" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 475.0
+offset_right = 1070.0
+offset_bottom = 633.0
+texture = ExtResource("1_c3ow0")
+
+[node name="BackgroundAvatar" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 400.0
+offset_right = 985.0
+offset_bottom = 553.0
+texture = ExtResource("2_v2m1e")
+
+[node name="TextLabel" type="Label" parent="."]
+anchors_preset = -1
+offset_left = 264.0
+offset_top = 520.0
+offset_right = 848.0
+offset_bottom = 576.0
+vertical_alignment = 1
+autowrap_mode = 3
