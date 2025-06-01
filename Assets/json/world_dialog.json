@@ -1,8 +1,6 @@
 {
-	"walk": [
-		"Tropi walks around the deserted area alone. Press {move_left} and {move_right} to move around."
-	],
-	"jump": [
+	"movement": [
+		"Tropi walks around the deserted area alone. Press {move_left} and {move_right} to move around.",
 		"Tropi is capable of small jumps. Press {jump} to jump."
 	],
 	"charge_jump": [

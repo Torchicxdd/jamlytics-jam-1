@@ -47,7 +47,6 @@ var prev_angular_velocity: float = 0
 var swing_direction_initialized: bool = false
 @export var detach_vertical_swing_boost: float = -1250
 @export var swing_energy_loss: float = 0.99
-var used_socket: Array[Node] = []
 
 # Coyote timer
 @onready var coyote_timer : Timer = $CoyoteTimer
@@ -55,6 +54,9 @@ var used_socket: Array[Node] = []
 func _ready() -> void:
 	# Initialize health bar
 	add_health_bars(health)
+	SignalBus.connect("death", Callable(self, "_on_death"))
+	SignalBus.connect("set_checkpoint", Callable(self, "_on_set_checkpoint"))
+	SignalBus.connect("heal_player", Callable(self, "heal"))
 	
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -67,6 +69,8 @@ func _physics_process(delta: float) -> void:
 				if collider.is_in_group("Hookable") and collider is Socket:
 					var socket = collider as Socket
 					if socket.is_hookable:
+						socket.is_swinging = true
+						SignalBus.emit_signal("swinging")
 						global_socket_position = collider.global_position
 						is_swinging = true
 						is_charge_dashing = false
@@ -74,12 +78,9 @@ func _physics_process(delta: float) -> void:
 						var swing_relative_character_position = global_position - global_socket_position
 						swing_angle = atan2(swing_relative_character_position.x, swing_relative_character_position.y)
 						swing_length = global_position.distance_to(global_socket_position)
-						# If the socket has not already been used, add it to the used sockets and heal the player
-						if not collider in used_socket and health < max_health:
-							used_socket.append(collider)
-							heal(1)
 				
 	elif Input.is_action_just_released("left_click"):
+		SignalBus.emit_signal("has_stopped_swinging")
 		is_swinging = false
 		swing_direction_initialized = false
 	
@@ -289,6 +290,12 @@ func reset_health():
 	clear_health_bars()
 	add_health_bars(health_constant)
 
+func _on_death():
+	respawn()
+
+func _on_set_checkpoint(position: Vector2):
+	checkpoint = position
+
 func reset_values():
 	health = health_constant
 	add_health_bars(health)
@@ -300,6 +307,5 @@ func reset_values():
 	is_charge_dashing = false
 	swing_direction_initialized = false
 	jump_buffer = false
-	used_socket.clear()
 	update_health_bar()
 	Global.hud.reset_charge_bar()
