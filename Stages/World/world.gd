@@ -36,6 +36,4 @@ func load_level(level_num: int):
 			level_instance.name = node_name
 			level_instance.global_position = levels.find_child(node_name).global_position
 			Global.loaded_levels.append(level_instance)
-			for level in Global.loaded_levels:
-				print(level.name)
 			loaded_levels.call_deferred("add_child", level_instance)

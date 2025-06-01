@@ -1,0 +1,30 @@
+{
+	"walk": [
+		"Tropi walks around the deserted area alone. Press {move_left} and {move_right} to move around."
+	],
+	"jump": [
+		"Tropi is capable of small jumps. Press {jump} to jump."
+	],
+	"charge_jump": [
+		"Tropi does not have much power left.",
+		"Hold {charge} to consume some remaining power and charge up a burst of power.",
+		"Tropi can use this charge in two different ways.",
+		"Release the charge on the ground to perform a Charge Jump."
+	],
+	"charge_dash": [
+		"Release the charge while in the air to perform a Charge Dash in the horizontal axis of movement."
+	],
+	"swing": [
+		"Tropi can also plug into a charging wire, once, in order to recover one bar of charge.",
+		"While in the air, hold Left Click on a socket to charge Tropi and start swinging to the opposite direction.",
+		"If Tropi reaches the maximum swing distance, he will receive a vertical burst of movement."
+	],
+	"swing_dash": [
+		"Tropi can also detach the charging wire before reaching maximum swing distance, giving him no extra movement burst.",
+		"He can also detach early by performing a Charge Dash while swinging."
+	],
+	"charging_station": [
+		"There are remnants of the old world's power.",
+		"Tropi can fully recharge by standing next to the charging stations."
+	]
+}
