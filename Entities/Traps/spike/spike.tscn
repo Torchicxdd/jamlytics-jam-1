@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6d3slorid4pf"]
 
 [ext_resource type="Script" uid="uid://crv2hfmi15sd7" path="res://Entities/Traps/spike/spike.gd" id="1_bxdqp"]
-[ext_resource type="Texture2D" uid="uid://bwq0qp2djskup" path="res://Entities/Traps/spike/spike.png" id="2_amryr"]
+[ext_resource type="Texture2D" uid="uid://vifhmn860bt2" path="res://Assets/spikes.png" id="2_amryr"]
 
 [node name="Spike" type="Area2D" groups=["Obstacle"]]
 collision_layer = 8
@@ -9,7 +9,7 @@ collision_mask = 0
 script = ExtResource("1_bxdqp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.18519, 1.18519)
+position = Vector2(0, 3)
 texture = ExtResource("2_amryr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
