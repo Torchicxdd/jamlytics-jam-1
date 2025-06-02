@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://dp5k3uq3x448f"]
+[gd_scene load_steps=11 format=4 uid="uid://dp5k3uq3x448f"]
 
 [ext_resource type="TileSet" uid="uid://kta41g8k8m8w" path="res://Assets/Tilesets/DarkTileset/DarkTileset.tres" id="1_2ojq6"]
 [ext_resource type="Script" uid="uid://bh5asa63yras3" path="res://Stages/Level1/level1_entry_collider.gd" id="2_b13i0"]
 [ext_resource type="PackedScene" uid="uid://byummbceivibr" path="res://Entities/Timer/HealthLossTimer.tscn" id="3_433hs"]
 [ext_resource type="PackedScene" uid="uid://bxuiqrmxc8kly" path="res://Entities/Timer/RaceStartTrigger.tscn" id="4_ancos"]
 [ext_resource type="PackedScene" uid="uid://cxpgt05uk4hhj" path="res://Entities/Timer/RaceEndTrigger.tscn" id="5_3cwmo"]
+[ext_resource type="PackedScene" uid="uid://dy8lbcvrro0m0" path="res://Common/Scenes/components/ItemInteractable.tscn" id="6_g6q1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ojq6"]
 size = Vector2(20, 208)
@@ -14,6 +15,9 @@ size = Vector2(48, 1168)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6q1v"]
 size = Vector2(48, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owf0n"]
+size = Vector2(64, 1176)
 
 [node name="Level1" type="Node2D"]
 
@@ -51,25 +55,14 @@ collision = NodePath("CollisionShape2D")
 position = Vector2(2.79753e-06, 64)
 shape = SubResource("RectangleShape2D_g6q1v")
 
-[connection signal="area_entered" from="TileMapLayer/Spike" to="TileMapLayer/Spike" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374716" to="TileMapLayer/@Area2D@374716" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374717" to="TileMapLayer/@Area2D@374717" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374718" to="TileMapLayer/@Area2D@374718" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374719" to="TileMapLayer/@Area2D@374719" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374720" to="TileMapLayer/@Area2D@374720" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374721" to="TileMapLayer/@Area2D@374721" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374722" to="TileMapLayer/@Area2D@374722" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374723" to="TileMapLayer/@Area2D@374723" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374724" to="TileMapLayer/@Area2D@374724" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374725" to="TileMapLayer/@Area2D@374725" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374726" to="TileMapLayer/@Area2D@374726" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374727" to="TileMapLayer/@Area2D@374727" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374728" to="TileMapLayer/@Area2D@374728" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374729" to="TileMapLayer/@Area2D@374729" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374730" to="TileMapLayer/@Area2D@374730" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374731" to="TileMapLayer/@Area2D@374731" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374732" to="TileMapLayer/@Area2D@374732" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374733" to="TileMapLayer/@Area2D@374733" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@374734" to="TileMapLayer/@Area2D@374734" method="_on_area_entered"]
-[connection signal="body_entered" from="TileMapLayer/Checkpoint" to="TileMapLayer/Checkpoint" method="_on_body_entered"]
+[node name="ItemInteractable" parent="." instance=ExtResource("6_g6q1v")]
+position = Vector2(1664, -192)
+dialog_key = "level_start"
+
+[node name="CollisionShape2D" parent="ItemInteractable" index="0"]
+position = Vector2(-480, -384)
+shape = SubResource("RectangleShape2D_owf0n")
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+
+[editable path="ItemInteractable"]
