@@ -1,10 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxpgt05uk4hhj"]
+[gd_scene load_steps=3 format=3 uid="uid://cxpgt05uk4hhj"]
 
 [ext_resource type="Script" uid="uid://bompkxfdmqkd8" path="res://Entities/Timer/race_end_trigger.gd" id="1_ovnlp"]
+[ext_resource type="Texture2D" uid="uid://cfb7pv15qbw5r" path="res://Entities/Timer/EndLvlAsset.png" id="2_1qjo3"]
 
 [node name="RaceEndTrigger" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_ovnlp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1qjo3")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

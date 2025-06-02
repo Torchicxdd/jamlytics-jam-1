@@ -12,8 +12,8 @@ var inactive_texture = preload("res://Assets/station-inactive.png")
 func _on_body_entered(body):
 	if body.name == "Player":
 		SignalBus.emit_signal("heal_player", body.health_constant - body.health)
+		SignalBus.emit_signal("set_checkpoint", global_position)
 		if not active:
-			SignalBus.emit_signal("set_checkpoint", global_position)
 			sprite.texture = active_texture
 			active = true
 			sfx_checkpoint.play()
