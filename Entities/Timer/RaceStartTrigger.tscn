@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxuiqrmxc8kly"]
+
+[ext_resource type="Script" uid="uid://l7hskgu0yqh7" path="res://Entities/Timer/race_start_trigger.gd" id="1_n0ptr"]
+
+[node name="RaceStartTrigger" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_n0ptr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
