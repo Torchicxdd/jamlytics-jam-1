@@ -23,3 +23,6 @@ signal swinging()
 signal start_level_timer(timer: Timer)
 signal stop_level_timer()
 signal finished_level()
+
+# Endgame
+signal game_end()
