@@ -22,3 +22,4 @@ signal swinging()
 # Timer
 signal start_level_timer(timer: Timer)
 signal stop_level_timer()
+signal finished_level()

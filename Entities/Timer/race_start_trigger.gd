@@ -20,5 +20,6 @@ func _on_death():
 	SignalBus.emit_signal("stop_level_timer")
 	
 func _on_stop_timer():
-	timer.stop()
-	is_started = false
+	if timer:
+		timer.stop()
+		is_started = false

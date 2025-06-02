@@ -10,6 +10,7 @@ func _ready() -> void:
 	SignalBus.connect("take_damage", Callable(self, "_on_take_damage"))
 	SignalBus.connect("start_level_timer", Callable(self, "_on_start_level_timer"))
 	SignalBus.connect("stop_level_timer", Callable(self, "_on_stop_level_timer"))
+	SignalBus.connect("finished_level", Callable(self, "_on_stop_level_timer"))
 	
 func _process(delta: float) -> void:
 	if is_timer_running and timer:
