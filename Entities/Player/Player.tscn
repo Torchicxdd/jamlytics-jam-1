@@ -366,22 +366,27 @@ libraries = {
 
 [node name="Jump" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource("3_1des2")
+bus = &"SFX"
 
 [node name="ChargeJump" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource("4_1des2")
 volume_db = -1.0
+bus = &"SFX"
 
 [node name="ChargeDash" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource("5_an6q6")
 volume_db = -1.0
+bus = &"SFX"
 
 [node name="Swinging" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource("6_t38ms")
 volume_db = 7.0
+bus = &"SFX"
 
 [node name="Death" type="AudioStreamPlayer" parent="SoundEffects"]
 stream = ExtResource("7_hj1c0")
 volume_db = -1.0
+bus = &"SFX"
 
 [connection signal="area_entered" from="ObstacleCollision" to="ObstacleCollision" method="_on_area_entered"]
 [connection signal="body_entered" from="ObstacleCollision" to="ObstacleCollision" method="_on_body_entered"]
