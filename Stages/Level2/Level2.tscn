@@ -50,15 +50,4 @@ collision = NodePath("CollisionShape2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RaceEndTrigger"]
 shape = SubResource("RectangleShape2D_3dves")
 
-[connection signal="body_entered" from="TileMapLayer/Checkpoint" to="TileMapLayer/Checkpoint" method="_on_body_entered"]
-[connection signal="area_entered" from="TileMapLayer/Spike" to="TileMapLayer/Spike" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@64711" to="TileMapLayer/@Area2D@64711" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@64712" to="TileMapLayer/@Area2D@64712" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@64713" to="TileMapLayer/@Area2D@64713" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@64714" to="TileMapLayer/@Area2D@64714" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@64715" to="TileMapLayer/@Area2D@64715" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@64716" to="TileMapLayer/@Area2D@64716" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@64717" to="TileMapLayer/@Area2D@64717" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@64718" to="TileMapLayer/@Area2D@64718" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@64719" to="TileMapLayer/@Area2D@64719" method="_on_area_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
