@@ -47,6 +47,9 @@ position = Vector2(17984, -8000)
 [node name="Level6" type="Marker2D" parent="LevelMarkers"]
 position = Vector2(23424, -8448)
 
+[node name="Level7" type="Marker2D" parent="LevelMarkers"]
+position = Vector2(24640, -11072)
+
 [node name="Player" parent="." instance=ExtResource("1_8ohrn")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
