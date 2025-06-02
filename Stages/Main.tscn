@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bpiyhiq4ts7te" path="res://Stages/World/World.tscn" id="1_n2ew2"]
 [ext_resource type="PackedScene" uid="uid://c5bcalqvp5n14" path="res://Common/Hud/Hud.tscn" id="2_g247f"]
+[ext_resource type="PackedScene" uid="uid://dbx2aen3pc4i1" path="res://Stages/Options/PauseMenu.tscn" id="3_kvtte"]
 [ext_resource type="AudioStream" uid="uid://dhakxdlx31jef" path="res://Audio/jammalytics.mp3" id="3_5neot"]
 
 [node name="Main" type="Node2D"]
@@ -9,6 +10,8 @@
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HBoxContainer" parent="CanvasLayer" instance=ExtResource("2_g247f")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_kvtte")]
 
 [node name="World" parent="." instance=ExtResource("1_n2ew2")]
 
