@@ -5,6 +5,7 @@ class_name World extends Node2D
 
 func _ready() -> void:
 	Global.world = self
+	Global.loaded_levels.clear()
 	load_level(0)
 	load_level(1)
 
