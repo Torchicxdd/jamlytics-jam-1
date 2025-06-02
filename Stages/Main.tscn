@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cryjilu0rpsim"]
+[gd_scene load_steps=5 format=3 uid="uid://bqvunh1goxfus"]
 
 [ext_resource type="PackedScene" uid="uid://bpiyhiq4ts7te" path="res://Stages/World/World.tscn" id="1_n2ew2"]
 [ext_resource type="PackedScene" uid="uid://c5bcalqvp5n14" path="res://Common/Hud/Hud.tscn" id="2_g247f"]
 [ext_resource type="AudioStream" uid="uid://dhakxdlx31jef" path="res://Audio/jammalytics.mp3" id="3_5neot"]
-[ext_resource type="PackedScene" path="res://Stages/Options/PauseMenu.tscn" id="3_kvtte"]
+[ext_resource type="PackedScene" uid="uid://dbx2aen3pc4i1" path="res://Stages/Options/PauseMenu.tscn" id="3_kvtte"]
 
 [node name="Main" type="Node2D"]
 
@@ -19,4 +19,5 @@
 process_mode = 3
 stream = ExtResource("3_5neot")
 autoplay = true
+bus = &"Music"
 parameters/looping = true
