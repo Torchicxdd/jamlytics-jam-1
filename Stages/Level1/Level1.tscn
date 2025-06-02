@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=4 uid="uid://dp5k3uq3x448f"]
+[gd_scene load_steps=9 format=4 uid="uid://dp5k3uq3x448f"]
 
 [ext_resource type="TileSet" uid="uid://kta41g8k8m8w" path="res://Assets/Tilesets/DarkTileset/DarkTileset.tres" id="1_2ojq6"]
 [ext_resource type="Script" uid="uid://bh5asa63yras3" path="res://Stages/Level1/level1_entry_collider.gd" id="2_b13i0"]
+[ext_resource type="PackedScene" uid="uid://byummbceivibr" path="res://Entities/Timer/HealthLossTimer.tscn" id="3_433hs"]
+[ext_resource type="PackedScene" uid="uid://bxuiqrmxc8kly" path="res://Entities/Timer/RaceStartTrigger.tscn" id="4_ancos"]
+[ext_resource type="PackedScene" uid="uid://cxpgt05uk4hhj" path="res://Entities/Timer/RaceEndTrigger.tscn" id="5_3cwmo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ojq6"]
 size = Vector2(20, 208)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cwmo"]
+size = Vector2(128, 1152)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6q1v"]
+size = Vector2(144, 20)
 
 [node name="Level1" type="Node2D"]
 
@@ -19,7 +28,25 @@ collision_mask = 2
 script = ExtResource("2_b13i0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 shape = SubResource("RectangleShape2D_2ojq6")
+
+[node name="RaceStartTrigger" parent="." node_paths=PackedStringArray("collision", "timer") instance=ExtResource("4_ancos")]
+position = Vector2(1984, -192)
+collision = NodePath("CollisionShape2D")
+timer = NodePath("HealthLossTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RaceStartTrigger"]
+position = Vector2(0, -384)
+shape = SubResource("RectangleShape2D_3cwmo")
+
+[node name="HealthLossTimer" parent="RaceStartTrigger" instance=ExtResource("3_433hs")]
+wait_time = 15.0
+
+[node name="RaceEndTrigger" parent="." node_paths=PackedStringArray("collision") instance=ExtResource("5_3cwmo")]
+position = Vector2(5184, -1568)
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RaceEndTrigger"]
+shape = SubResource("RectangleShape2D_g6q1v")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

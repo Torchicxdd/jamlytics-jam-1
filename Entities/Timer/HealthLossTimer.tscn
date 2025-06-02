@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://byummbceivibr"]
+
+[ext_resource type="Script" uid="uid://p40ufshdgcn0" path="res://Entities/Timer/health_loss_timer.gd" id="1_sugeu"]
+
+[node name="HealthLossTimer" type="Timer"]
+script = ExtResource("1_sugeu")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]
