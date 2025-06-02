@@ -51,6 +51,13 @@ var swing_direction_initialized: bool = false
 # Coyote timer
 @onready var coyote_timer : Timer = $CoyoteTimer
 
+# Sund Effects
+@onready var sfx_jump = $SoundEffects/Jump
+@onready var sfx_charge_jump = $SoundEffects/ChargeJump
+@onready var sfx_charge_dash = $SoundEffects/ChargeDash
+@onready var sfx_swinging = $SoundEffects/Swinging
+@onready var sfx_death = $SoundEffects/Death
+
 func _ready() -> void:
 	# Initialize health bar
 	SignalBus.emit_signal("heal_player", health)
@@ -81,6 +88,7 @@ func _physics_process(delta: float) -> void:
 						var swing_relative_character_position = global_position - global_socket_position
 						swing_angle = atan2(swing_relative_character_position.x, swing_relative_character_position.y)
 						swing_length = global_position.distance_to(global_socket_position)
+						sfx_swinging.play()
 				
 	elif Input.is_action_just_released("left_click"):
 		SignalBus.emit_signal("has_stopped_swinging")
@@ -163,6 +171,7 @@ func handle_charge_inputs(delta):
 		is_swinging = false
 		velocity.y = -(charge_jump_power)
 		SignalBus.emit_signal("take_damage", 1)
+		sfx_charge_jump.play()
 		
 	if Input.is_action_just_released("charge") and not is_on_floor() and not is_charge_dashing:
 		is_jumping = false
@@ -171,6 +180,7 @@ func handle_charge_inputs(delta):
 		is_swinging = false
 		velocity.y = -(charge_jump_power/2)
 		SignalBus.emit_signal("take_damage", 1)
+		sfx_charge_dash.play()
 		
 	# Handle charging jumps
 	if Input.is_action_pressed("charge"):
@@ -248,6 +258,8 @@ func jump() -> void:
 	is_swinging = false
 	jump_available = false
 	velocity.y = -(jump_power)
+	# Play jump sound effect
+	sfx_jump.play()
 
 func take_damage(damage: int) -> void:
 	health -= damage
@@ -273,6 +285,7 @@ func _on_coyote_timer_timeout() -> void:
 
 func _on_death():
 	global_position = checkpoint
+	sfx_death.play()
 	reset_values()
 
 func _on_on_platform(speed: Vector2):

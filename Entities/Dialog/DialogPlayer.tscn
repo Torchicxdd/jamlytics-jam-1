@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://8xcibs6yx7bj"]
+[gd_scene load_steps=7 format=3 uid="uid://8xcibs6yx7bj"]
 
 [ext_resource type="Texture2D" uid="uid://cxcx20ycol7xj" path="res://themes/dialog_bg.png" id="1_c3ow0"]
 [ext_resource type="Script" uid="uid://1xavs85imxx0" path="res://Entities/Dialog/dialog_player.gd" id="1_kqpob"]
 [ext_resource type="Texture2D" uid="uid://bttpya60yqrgm" path="res://themes/dialog_avatar.png" id="2_v2m1e"]
 [ext_resource type="Texture2D" uid="uid://b7nvyre85oon2" path="res://Assets/skipBg.png" id="4_pxxxo"]
+[ext_resource type="AudioStream" uid="uid://bqp6nmtlunt7y" path="res://Audio/dialogue1.wav" id="5_tm648"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pxxxo"]
 texture = ExtResource("4_pxxxo")
@@ -76,3 +77,7 @@ offset_top = 400.0
 offset_right = 1006.0
 offset_bottom = 553.0
 texture = ExtResource("2_v2m1e")
+
+[node name="DialogueSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_tm648")
+bus = &"SFX"

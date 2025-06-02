@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://n88x4bl2mo2g"]
+[gd_scene load_steps=5 format=3 uid="uid://n88x4bl2mo2g"]
 
 [ext_resource type="Script" uid="uid://d4de33jxlbxh7" path="res://Entities/Platform_Tiles/checkpoint/checkpoint.gd" id="1_ojb0g"]
 [ext_resource type="Texture2D" uid="uid://4i3b6yeib27h" path="res://Assets/station-inactive.png" id="2_ntlhy"]
+[ext_resource type="AudioStream" uid="uid://csjlo686rus75" path="res://Audio/checkpoint.wav" id="3_xfvjj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ya6eo"]
 size = Vector2(94, 188)
@@ -19,5 +20,9 @@ texture = ExtResource("2_ntlhy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -63)
 shape = SubResource("RectangleShape2D_ya6eo")
+
+[node name="CheckpointSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xfvjj")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

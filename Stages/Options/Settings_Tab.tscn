@@ -59,7 +59,7 @@ bus_name = "Music"
 
 [node name="AudioSlider3" parent="TabContainer/Sound/MarginContainer/VBoxContainer" instance=ExtResource("1_fvpoy")]
 layout_mode = 2
-bus_name = "Sfx"
+bus_name = "SFX"
 
 [node name="Controls" type="TabBar" parent="TabContainer"]
 visible = false

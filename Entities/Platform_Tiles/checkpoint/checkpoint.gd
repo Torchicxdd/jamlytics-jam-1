@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var sprite = $Sprite2D
+@onready var sfx_checkpoint = $CheckpointSound
 
 var active := false
 
@@ -15,3 +16,4 @@ func _on_body_entered(body):
 			SignalBus.emit_signal("set_checkpoint", global_position)
 			sprite.texture = active_texture
 			active = true
+			sfx_checkpoint.play()
