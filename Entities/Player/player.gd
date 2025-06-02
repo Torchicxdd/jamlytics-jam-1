@@ -269,8 +269,6 @@ func take_damage(damage: int) -> void:
 
 func heal(damage: int) -> void:
 	health += damage
-	if health > health_constant:
-		health = health_constant
 
 # called by whatever timer that is in the stage that the player is in
 # make sure to set up the signal per stage to whatver time u want
