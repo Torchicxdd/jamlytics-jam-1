@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbx2aen3pc4i1"]
+
+[ext_resource type="Script" uid="uid://dkbogpjecexb5" path="res://Stages/Options/pause_menu.gd" id="1_d4fy3"]
+[ext_resource type="PackedScene" uid="uid://q66wg7fda3c8" path="res://Stages/Options/Settings_Tab.tscn" id="2_d4fy3"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d4fy3")
+
+[node name="SettingsTab" parent="." instance=ExtResource("2_d4fy3")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = 90.0
+offset_right = 160.0
+offset_bottom = 90.0
+scale = Vector2(0.75, 0.75)
