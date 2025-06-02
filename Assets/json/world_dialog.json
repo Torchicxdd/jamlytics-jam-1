@@ -24,5 +24,10 @@
 	"charging_station": [
 		"There are remnants of the old world's power.",
 		"Tropi can fully recharge by standing next to the charging stations."
+	],
+	"level_start": [
+		"Levels start a countdown when Tropi passes the Start Line.",
+		"Tropi must get to the next checkpoint in time before he runs out of battery.",
+		"Tropi must live!"
 	]
 }

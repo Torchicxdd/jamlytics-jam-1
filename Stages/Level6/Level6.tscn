@@ -51,19 +51,4 @@ collision = NodePath("CollisionShape2D")
 position = Vector2(0, -72)
 shape = SubResource("RectangleShape2D_idyu5")
 
-[connection signal="area_entered" from="TileMapLayer/Spike" to="TileMapLayer/Spike" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377232" to="TileMapLayer/@Area2D@377232" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377233" to="TileMapLayer/@Area2D@377233" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377234" to="TileMapLayer/@Area2D@377234" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377235" to="TileMapLayer/@Area2D@377235" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377236" to="TileMapLayer/@Area2D@377236" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377237" to="TileMapLayer/@Area2D@377237" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377238" to="TileMapLayer/@Area2D@377238" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377239" to="TileMapLayer/@Area2D@377239" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377240" to="TileMapLayer/@Area2D@377240" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377241" to="TileMapLayer/@Area2D@377241" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377242" to="TileMapLayer/@Area2D@377242" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377243" to="TileMapLayer/@Area2D@377243" method="_on_area_entered"]
-[connection signal="area_entered" from="TileMapLayer/@Area2D@377244" to="TileMapLayer/@Area2D@377244" method="_on_area_entered"]
-[connection signal="body_entered" from="TileMapLayer/Checkpoint" to="TileMapLayer/Checkpoint" method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

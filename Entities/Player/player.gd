@@ -298,7 +298,7 @@ func _on_set_checkpoint(position: Vector2):
 	checkpoint = position
 
 func reset_values():
-	health = health_constant
+	SignalBus.emit_signal("heal_player", health_constant - health)
 	current_charge_time = 0.0
 	is_swinging = false
 	is_jumping = false
@@ -307,4 +307,3 @@ func reset_values():
 	is_charge_dashing = false
 	swing_direction_initialized = false
 	jump_buffer = false
-	SignalBus.emit_signal("heal_player", health)

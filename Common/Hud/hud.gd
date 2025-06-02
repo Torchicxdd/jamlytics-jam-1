@@ -22,7 +22,6 @@ func _on_heal_player(amount: int):
 		$HBoxContainer2/VBoxContainer/HealthBar.add_health()
 	
 func _on_death():
-	clear_health_bars()
 	reset_charge_bar()
 	
 func _on_take_damage(amount: int):
