@@ -9,6 +9,7 @@ var skip_text = "Press [color=#EE561A]{interact}[/color] to skip"
 @onready var background = $Background
 @onready var text_label = $Background/TextBackground/TextLabel
 @onready var skip_label = $Background/TextBackground/VBoxContainer/skipLable
+@onready var sfx_dialogue = $DialogueSound
 
 var input_map_values: Array = InputMap.get_actions()
 
@@ -37,6 +38,7 @@ func on_display_dialog(text_key):
 func show_text():
 	text_label.text = replace_variables(selected_text.pop_front())
 	skip_label.text = replace_variables(skip_text)
+	sfx_dialogue.play()
 	
 func next_line():
 	if selected_text.size() > 0:
@@ -49,6 +51,7 @@ func finish():
 	text_label.text = ""
 	background.visible = false
 	get_tree().paused = false
+	sfx_dialogue.play()
 	
 func replace_variables(text: String) -> String:
 	var pattern = RegEx.new()

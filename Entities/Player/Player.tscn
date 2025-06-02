@@ -1,7 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://d11att5mis0e5"]
+[gd_scene load_steps=29 format=3 uid="uid://d11att5mis0e5"]
 
 [ext_resource type="Script" uid="uid://cboku4xlejoaj" path="res://Entities/Player/player.gd" id="1_vweq0"]
+[ext_resource type="AudioStream" uid="uid://cwj0i507q3fep" path="res://Audio/Player/jump.wav" id="3_1des2"]
 [ext_resource type="Texture2D" uid="uid://d3nuw6bx6tyxs" path="res://Entities/Player/Body/PlayerSpritesheetV1.png" id="3_vweq0"]
+[ext_resource type="AudioStream" uid="uid://cyxv34dgkvgfq" path="res://Audio/Player/charge_jump.wav" id="4_1des2"]
+[ext_resource type="AudioStream" uid="uid://deyqenxaw4whc" path="res://Audio/Player/charge_dash.wav" id="5_an6q6"]
+[ext_resource type="AudioStream" uid="uid://d0m5u0yduigbv" path="res://Audio/Player/swinging1.wav" id="6_t38ms"]
+[ext_resource type="AudioStream" uid="uid://6ecae051tsd3" path="res://Audio/Player/death.wav" id="7_hj1c0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1des2"]
 atlas = ExtResource("3_vweq0")
@@ -356,6 +361,32 @@ libraries = {
 }
 
 [node name="CoyoteTimer" type="Timer" parent="."]
+
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="Jump" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("3_1des2")
+bus = &"SFX"
+
+[node name="ChargeJump" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("4_1des2")
+volume_db = -1.0
+bus = &"SFX"
+
+[node name="ChargeDash" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("5_an6q6")
+volume_db = -1.0
+bus = &"SFX"
+
+[node name="Swinging" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("6_t38ms")
+volume_db = 7.0
+bus = &"SFX"
+
+[node name="Death" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("7_hj1c0")
+volume_db = -1.0
+bus = &"SFX"
 
 [connection signal="area_entered" from="ObstacleCollision" to="ObstacleCollision" method="_on_area_entered"]
 [connection signal="body_entered" from="ObstacleCollision" to="ObstacleCollision" method="_on_body_entered"]

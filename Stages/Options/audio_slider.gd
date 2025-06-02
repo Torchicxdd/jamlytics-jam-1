@@ -4,7 +4,7 @@ extends Control
 @onready var audio_num = $audio_num as Label
 @onready var slider = $HSlider as HSlider
 
-@export_enum("Master", "Music", "Sfx") var bus_name : String
+@export_enum("Master", "Music", "SFX") var bus_name : String
 
 var bus_index : int = 0
 
